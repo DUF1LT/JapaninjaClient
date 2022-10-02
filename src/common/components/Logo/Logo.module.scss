@@ -1,0 +1,14 @@
+@import "../../../assets/palette.scss";
+@import "../../../assets/dimensions.scss";
+
+.logo {
+    font-family: 'Jost-SemiBold';
+    color: $white-color;
+    font-size: $font-big;
+    text-decoration: none;
+
+    &-red {
+        color: $red-color;
+    }
+}
+

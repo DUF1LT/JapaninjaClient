@@ -1,24 +1,17 @@
-import React from 'react';
-import './App.css';
+import { Routes, Route } from 'react-router-dom'
+import { Layout } from './common/components/Layout';
+import { AboutUs } from './pages/aboutUs/AboutUs';
+import { Home } from './pages/home/Home';
+import { links } from './resources';
 
-function App() {
+export function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path={links.root} element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path={links.aboutUs} element={<AboutUs />} />
+        <Route path='*' element={<Home />} />
+      </Route>
+    </Routes>
   );
 }
-
-export default App;
