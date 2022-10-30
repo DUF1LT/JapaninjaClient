@@ -5,10 +5,11 @@
     width: auto;
     box-sizing: content-box;
     
-    font-size: $font-extra-small;
+    font-family: inherit;
+    font-size: $font-small;
     color: $white-color;
     
-    padding: 10px 25px;
+    padding: 8px 30px;
     
     border: 2px solid $red-color;
     border-radius: 13px;

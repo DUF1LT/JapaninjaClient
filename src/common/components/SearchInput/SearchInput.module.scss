@@ -1,0 +1,27 @@
+@import "src/assets/palette.scss";
+
+.field {
+    color: $white-color;
+    border-color: $white-color;
+}
+
+.input {
+    color: $white-color;
+}
+
+.input:hover {
+    border-color: $white-color;
+}
+
+.outline {
+    border-color: $white-color;
+    border-radius: 15px;
+}
+
+.outline:hover {
+    border-color: $white-color;
+}
+
+.focused {
+    border-color: $white-color;
+}

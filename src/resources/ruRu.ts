@@ -3,4 +3,7 @@ export const ruRu = {
     contacts: 'Контакты',
     aboutUs: 'О нас',
     enter: 'Войти',
+    exit: 'Выйти',
+    whatDoYouWant: 'Что пожелаете?',
+    basket: 'Корзина',
 };
