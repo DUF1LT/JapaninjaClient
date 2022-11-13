@@ -1,4 +1,10 @@
 .authorization {
     display: flex;
     column-gap: 45px;
+
+    &-heading {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
 }

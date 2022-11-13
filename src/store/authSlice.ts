@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { AuthData } from '../models/response/AuthResponse';
+import { AuthData } from '../models/response/AuthData';
 
-const authDataFallback: AuthData = {
+const authDataFallback: Partial<AuthData> = {
     id: undefined,
     accessToken: undefined,
     tokenExpirationTime: undefined,
     role: undefined,
 };
 
-const initializeAuthData = (): AuthData => {
+const initializeAuthData = (): AuthData | Partial<AuthData> => {
     const token = localStorage.getItem('token');
     const authDataString = localStorage.getItem('authData');
 

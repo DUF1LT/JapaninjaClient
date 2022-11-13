@@ -1,0 +1,12 @@
+@import "src/assets/dimensions.scss";
+@import "src/assets/palette.scss";
+
+.form-field {
+    margin-bottom: 15px;
+
+    &-error {
+        height: 20px;
+        font-size: $font-extra-small;
+        color: $red-color;
+    }
+}

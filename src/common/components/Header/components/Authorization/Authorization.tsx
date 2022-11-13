@@ -1,45 +1,63 @@
-import { Button } from "../../../Button";
-import { AuthService } from "../../../../../services/AuthService";
-import { login, logout } from "../../../../../store/authSlice";
-import { useAppDispatch, useAppSelector } from "../../../../../store/hooks";
-import { localization } from "../../../../../resources";
+import { useState } from "react";
+
+import { Button } from "common/components/Button";
+import { login, logout } from "store/authSlice";
+import { AuthData, Role } from "models/response/AuthData";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { localization } from "resources";
+
+import { LoginForm } from "../LoginForm/LoginForm";
 
 import styles from './Authorization.module.scss';
 
+const authDataRoleToString: Record<Role, string> = {
+    [Role.Manager]: localization.manager,
+    [Role.Customer]: localization.customer,
+    [Role.Courier]: localization.courier,
+}
+
 export function Authorization() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const auth = useAppSelector(state => state.auth);
     const dispatch = useAppDispatch();
 
-    const onLoginClick = async () => {
-        const loginResult = await AuthService.login('manager@japaninja.com', 'japaninja2022MANAGER');
-        if ('error' in loginResult) {
-            console.log('Error in login');
-        } else {
-            dispatch(login(loginResult));
-        }
+    const onLoginClick = () => {
+        setIsModalOpen(true);
     };
 
-    const onLogoutClick = async () => {
+    const onSuccesfulLogin = (authData: AuthData) => {
+        setIsModalOpen(false);
+        dispatch(login(authData));
+    };
+
+    const onLogoutClick = () => {
         dispatch(logout());
     };
 
     return (
-        <div className={styles.authorization}>
-            {auth.isLogedIn
-                ? (
-                    <div>
-                        <span>{`Hello, ${auth.authData.role}`}</span>
-                        <Button onClick={onLogoutClick}>
-                            {localization.exit}
+        <>
+            <div className={styles.authorization}>
+                {auth.isLogedIn
+                    ? (
+                        <div className={styles['authorization-heading']}>
+                            <span>{localization.hello(authDataRoleToString[auth.authData.role!])}</span>
+                            <Button onClick={onLogoutClick}>
+                                {localization.exit}
+                            </Button>
+                        </div>
+                    )
+                    : (
+                        <Button onClick={() => onLoginClick()}>
+                            {localization.enter}
                         </Button>
-                    </div>
-                )
-                : (
-                    <Button onClick={() => onLoginClick()}>
-                        {localization.enter}
-                    </Button>
-                )
-            }
-        </div>
+                    )
+                }
+            </div>
+            <LoginForm
+                isOpen={isModalOpen}
+                onSuccesfulLogin={onSuccesfulLogin}
+                onClose={() => setIsModalOpen(false)}
+            />
+        </>
     );
 };

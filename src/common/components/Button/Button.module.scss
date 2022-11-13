@@ -28,6 +28,10 @@
         background-image: $red-gradient-reversed;
     }
 
+    &__loading:hover {
+        background-color: transparent !important;
+    }
+
     transition: all 0.2s ease-in-out;
 }
 

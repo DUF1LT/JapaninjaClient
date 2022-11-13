@@ -1,5 +1,6 @@
+import { localization } from "resources";
 import { $api, endpoints } from "../api";
-import { AuthData } from "../models/response/AuthResponse";
+import { AuthData } from "../models/response/AuthData";
 import { ErrorResponse } from "../models/response/ErrorResponse";
 
 export class AuthService {
@@ -13,7 +14,7 @@ export class AuthService {
 
             return response.data as AuthData;
         } catch (error) {
-            return { error: 'Something went wrong' };
+            return { error: localization.somethingWentWrong };
         }
     }
 
@@ -29,7 +30,7 @@ export class AuthService {
         } catch (error) {
             console.log(error);
 
-            return { error: 'Something went wrong' };
+            return { error: localization.somethingWentWrong };
         }
     }
 } 
