@@ -9,20 +9,17 @@ import { TextField } from 'common/components/Form/TextField';
 import { useLogin } from 'common/helpers/login/useLogin';
 import { AuthData } from 'models/response/AuthData';
 
-import { loginFormStyles } from './styles';
+import { formStyles } from '../styles';
 import { LoginFormFields, LoginFormPayload } from './types';
 
 import styles from './LoginForm.module.scss';
-
-
-
-
 
 export type LoginFormProps = {
     className?: string;
     isOpen: boolean;
     onClose: () => void;
     onSuccesfulLogin: (authData: AuthData) => void;
+    onRegisterLinkClick: () => void;
 };
 
 const initialValues: LoginFormPayload = {
@@ -39,6 +36,7 @@ export function LoginForm({
     className,
     onClose,
     onSuccesfulLogin,
+    onRegisterLinkClick,
     isOpen
 }: LoginFormProps) {
     const [onLogin, isLoading, error] = useLogin(onSuccesfulLogin);
@@ -49,7 +47,7 @@ export function LoginForm({
             open={isOpen}
             onClose={onClose}
             PaperProps={{
-                style: loginFormStyles
+                style: formStyles
             }}
             classes={{
                 paper: styles['login-form-modal-paper'],
@@ -75,6 +73,7 @@ export function LoginForm({
 
                         <TextField
                             name={LoginFormFields.Password}
+                            type='password'
                             placeholder={localization.password}
                         />
 
@@ -93,6 +92,12 @@ export function LoginForm({
                             )}
                     </Form>
                 </Formik>
+                <span
+                    className={styles['login-form-register']}
+                    onClick={onRegisterLinkClick}
+                >
+                    {localization.registration}
+                </span>
             </div>
         </Dialog>
     )

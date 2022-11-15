@@ -6,9 +6,8 @@ import { AuthData, Role } from "models/response/AuthData";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { localization } from "resources";
 
-import { LoginForm } from "../LoginForm/LoginForm";
-
 import styles from './Authorization.module.scss';
+import { AuthorizationForm } from "./AuthorizationForm";
 
 const authDataRoleToString: Record<Role, string> = {
     [Role.Manager]: localization.manager,
@@ -25,7 +24,7 @@ export function Authorization() {
         setIsModalOpen(true);
     };
 
-    const onSuccesfulLogin = (authData: AuthData) => {
+    const onSuccesfulAuthorize = (authData: AuthData) => {
         setIsModalOpen(false);
         dispatch(login(authData));
     };
@@ -53,9 +52,9 @@ export function Authorization() {
                     )
                 }
             </div>
-            <LoginForm
-                isOpen={isModalOpen}
-                onSuccesfulLogin={onSuccesfulLogin}
+            <AuthorizationForm
+                isModalOpen={isModalOpen}
+                onSuccesfulAuthorize={onSuccesfulAuthorize}
                 onClose={() => setIsModalOpen(false)}
             />
         </>

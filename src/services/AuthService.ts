@@ -1,36 +1,46 @@
+import { AxiosError } from "axios";
+
 import { localization } from "resources";
+
 import { $api, endpoints } from "../api";
 import { AuthData } from "../models/response/AuthData";
 import { ErrorResponse } from "../models/response/ErrorResponse";
+import { createError, getErrorByErrorType } from "./utils";
+import { Error } from "./types";
 
 export class AuthService {
-    static async login(email: string, password: string): Promise<AuthData | ErrorResponse> {
+    static async login(email: string, password: string): Promise<AuthData | Error> {
         try {
-            const response = await $api.post<AuthData | ErrorResponse>(endpoints.login, { email, password });
-
-            if (response.status !== 200) {
-                return response.data as ErrorResponse;
-            }
+            const response = await $api.post<AuthData>(endpoints.login, { email, password });
 
             return response.data as AuthData;
         } catch (error) {
-            return { error: localization.somethingWentWrong };
+            const axiosErorr = error as AxiosError;
+
+            if (axiosErorr.isAxiosError) {
+                const errorData = axiosErorr.response?.data as ErrorResponse;
+
+                return getErrorByErrorType(errorData.error);
+            }
+
+            return createError(localization.somethingWentWrong);
         }
     }
 
-    static async register(email: string, password: string, confirmPassword: string): Promise<AuthData | ErrorResponse> {
+    static async register(email: string, password: string, confirmPassword: string): Promise<AuthData | Error> {
         try {
-            const response = await $api.post<AuthData | ErrorResponse>(endpoints.register, { email, password, confirmPassword });
-
-            if (response.status !== 200) {
-                return response.data as ErrorResponse;
-            }
+            const response = await $api.post<AuthData>(endpoints.register, { email, password, confirmPassword });
 
             return response.data as AuthData;
         } catch (error) {
-            console.log(error);
+            const axiosErorr = error as AxiosError;
+            if (axiosErorr.isAxiosError) {
+                const errorData = axiosErorr.response?.data as ErrorResponse;
 
-            return { error: localization.somethingWentWrong };
-        }
+                return getErrorByErrorType(errorData.error);
+            }
+
+            return createError(localization.somethingWentWrong)
+        };
     }
-} 
+}

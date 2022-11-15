@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-import { LoginFormPayload } from "common/components/Header/components/LoginForm/types";
+import { LoginFormPayload } from "common/components/Header/components/Authorization/Forms/LoginForm";
 import { AuthService } from "services/AuthService";
 import { AuthData } from "models/response/AuthData";
 
