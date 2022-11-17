@@ -6,7 +6,7 @@ export enum Role {
 
 export interface AuthData {
     id: string;
-    accessToken: string;
+    token: string;
     tokenExpirationTime: string;
     role: Role;
 }

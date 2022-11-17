@@ -1,15 +1,26 @@
 import { Container, Divider } from "@mui/material";
+import { canManage, hasAuthData } from "common/helpers/auth/authHelpers";
+import { getAllProductTypes } from "models/domain/helpers/getAllProductTypes";
+import { getStringByProductType } from "models/domain/helpers/getStringByProductType";
+import { useAppSelector } from "store/hooks";
 import { Colors } from "../../../assets/colors";
 
-import { localization } from "../../../resources";
+import { links, localization } from "../../../resources";
 import { Button } from "../Button";
 import { Logo } from "../Logo";
+import { NavigationLink } from "../NavigationLink";
 import { Authorization } from "./components/Authorization/Authorization";
 
 import styles from './Header.module.scss';
 
-
 export function Header() {
+    const productTypes = getAllProductTypes();
+    const { authData } = useAppSelector(state => state.auth);
+
+    const menuLinkByRole = hasAuthData(authData) && canManage(authData)
+        ? links.manager.menuWithProductType
+        : links.menu.menuWithProductType;
+
     return (
         <Container
             className={styles.header}
@@ -29,6 +40,14 @@ export function Header() {
                             {localization.basket}
                         </Button>
                     </div>
+                </div>
+                <div className={styles['header-menu']}>
+                    {productTypes.map(t => (
+                        <NavigationLink
+                            label={getStringByProductType(t)}
+                            link={menuLinkByRole(t)}
+                        />
+                    ))}
                 </div>
             </div>
         </Container>

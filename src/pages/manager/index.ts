@@ -1,0 +1,1 @@
+export { ManagerPageContainer } from './ManagerPageContainer';

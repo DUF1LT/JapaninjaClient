@@ -3,6 +3,7 @@ import { useCallback, useState } from "react";
 import { AuthService } from "services/AuthService";
 import { AuthData } from "models/response/AuthData";
 import { RegisterFormPayload } from "common/components/Header/components/Authorization/Forms/RegistrationForm/types";
+import { localization } from "resources";
 
 type Result = [
     onRegister: (payload: RegisterFormPayload) => void,
@@ -22,17 +23,25 @@ export const useRegister = (
 
         const { email, password, repeatPassword } = payload;
 
-        const loginResult = await AuthService.register(email, password, repeatPassword);
 
-        if ('error' in loginResult) {
+        try {
+            const registerResult = await AuthService.register(email, password, repeatPassword);
+
+            if ('error' in registerResult) {
+                setIsLoading(false);
+                setError(registerResult.error)
+
+                return;
+            }
+
             setIsLoading(false);
-            setError(loginResult.error)
-
-            return;
+            onSuccess?.(registerResult);
+        }
+        catch (e) {
+            setIsLoading(false);
+            setError(localization.somethingWentWrong)
         }
 
-        setIsLoading(false);
-        onSuccess?.(loginResult);
     }, [onSuccess]);
 
     return [onRegister, isLoading, error];

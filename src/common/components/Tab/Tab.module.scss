@@ -1,0 +1,11 @@
+@import "src/assets/palette.scss";
+
+.tab {
+    flex: 1;
+    color: $white-color;
+
+    &-selected {
+        background-color: $white-color;
+        color: $black-color;
+    }
+}

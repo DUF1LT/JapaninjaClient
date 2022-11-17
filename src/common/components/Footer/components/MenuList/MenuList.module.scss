@@ -1,0 +1,14 @@
+@import "src/assets/palette.scss";
+
+.menu-title {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.divider {
+    background-color: $red-color;
+}
+
+.menu-body {
+    margin-top: 15px;
+}

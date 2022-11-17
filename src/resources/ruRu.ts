@@ -14,6 +14,9 @@ export const ruRu = {
     repeatPassword: 'Повторите пароль',
     loading: 'Загрузка',
     hello: (role: string) => `Привет, ${role}`,
+    orders: 'Заказы',
+    dishes: 'Блюда',
+    couriers: 'Курьеры',
 
     //validations
     pleaseEnterEmail: 'Введите почту',
@@ -37,4 +40,14 @@ export const ruRu = {
     manager: 'Менеджер',
     customer: 'Покупатель',
     courier: 'Курьер',
+
+    //product types
+    sushi: 'Суши',
+    rolls: 'Роллы',
+    sets: 'Сеты',
+    soups: 'Супы',
+    noodles: 'Лапша',
+    snacks: 'Закуски',
+    drinks: 'Напитки',
+    garnish: 'Гарнир'
 };

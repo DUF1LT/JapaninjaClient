@@ -3,7 +3,7 @@ import { AuthData } from '../models/response/AuthData';
 
 const authDataFallback: Partial<AuthData> = {
     id: undefined,
-    accessToken: undefined,
+    token: undefined,
     tokenExpirationTime: undefined,
     role: undefined,
 };
@@ -33,24 +33,24 @@ const authSlice = createSlice({
     name: 'auth',
     initialState: {
         authData: initializeAuthData(),
-        isLogedIn: localStorage.getItem('authData') ? true : false,
+        isLoggedIn: localStorage.getItem('authData') ? true : false,
     },
     reducers: {
         login(state, action) {
             state.authData = action.payload;
-            state.isLogedIn = true;
+            state.isLoggedIn = true;
             localStorage.setItem('token', action.payload.token);
             localStorage.setItem('authData', JSON.stringify(action.payload));
         },
         register(state, action) {
             state.authData = action.payload;
-            state.isLogedIn = true;
+            state.isLoggedIn = true;
             localStorage.setItem('token', action.payload.token);
             localStorage.setItem('authData', JSON.stringify(action.payload));
         },
         logout(state) {
             state.authData = authDataFallback;
-            state.isLogedIn = false;
+            state.isLoggedIn = false;
             localStorage.removeItem('token');
             localStorage.removeItem('authData');
         },

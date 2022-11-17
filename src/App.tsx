@@ -1,10 +1,11 @@
 import { createTheme, ThemeProvider } from '@mui/material';
-import { Colors } from 'assets/colors';
 import { Routes, Route } from 'react-router-dom'
 
+import { Colors } from 'assets/colors';
+import { ManagerPageContainer } from 'pages/manager';
+
+import { Home } from './pages/home/HomePage';
 import { Layout } from './common/components/Layout';
-import { AboutUs } from './pages/aboutUs/AboutUs';
-import { Home } from './pages/home/Home';
 import { links } from './resources';
 
 
@@ -24,7 +25,7 @@ export function App() {
       <Routes>
         <Route path={links.root} element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path={links.aboutUs} element={<AboutUs />} />
+          <Route path={links.manager.root} element={<ManagerPageContainer />} />
           <Route path='*' element={<Home />} />
         </Route>
       </Routes>

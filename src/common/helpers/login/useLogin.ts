@@ -3,6 +3,7 @@ import { useCallback, useState } from "react";
 import { LoginFormPayload } from "common/components/Header/components/Authorization/Forms/LoginForm";
 import { AuthService } from "services/AuthService";
 import { AuthData } from "models/response/AuthData";
+import { localization } from "resources";
 
 type Result = [
     onLogin: (payload: LoginFormPayload) => void,
@@ -22,14 +23,22 @@ export const useLogin = (
 
         const { email, password } = payload;
 
-        const loginResult = await AuthService.login(email, password);
+        try {
+            const loginResult = await AuthService.login(email, password);
 
-        if ('error' in loginResult) {
-            setError(loginResult.error)
-            setIsLoading(false);
-        } else {
+            if ('error' in loginResult) {
+                setError(loginResult.error)
+                setIsLoading(false);
+
+                return;
+            }
+
             setIsLoading(false);
             onSuccess?.(loginResult);
+        }
+        catch (e) {
+            setIsLoading(false);
+            setError(localization.somethingWentWrong)
         }
     }, [onSuccess]);
 
