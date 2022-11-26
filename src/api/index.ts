@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { ProductType } from 'models/domain/ProductType';
 
 const API_URL = 'https://localhost:2472/api';
 
@@ -13,8 +14,17 @@ $api.interceptors.request.use(config => {
 });
 
 const endpoints = {
-    login: '/auth/login',
-    register: '/auth/register',
+    auth: {
+        login: '/auth/login',
+        register: '/auth/register',
+    },
+    manager: {
+    },
+    products: {
+        products: `/products`,
+        productsWithId: (id: string) => `/products/${id}`,
+        productsOfType: (type: ProductType) => `/products?type=${type}`,
+    }
 };
 
 export default $api;

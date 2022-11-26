@@ -1,10 +1,8 @@
-import { Container } from '@mui/system';
+import { Container } from '@mui/material';
 
-import { canManage, hasAuthData } from 'common/helpers/auth/authHelpers';
 import { getAllProductTypes } from 'models/domain/helpers/getAllProductTypes';
 import { getStringByProductType } from 'models/domain/helpers/getStringByProductType';
-import { links } from 'resources';
-import { useAppSelector } from 'store/hooks';
+import { useRoleAppConfig } from 'common/hooks/useRoleAppConfig';
 
 import { Logo } from '../Logo';
 import { NavigationLink } from '../NavigationLink';
@@ -14,41 +12,36 @@ import styles from './Footer.module.scss';
 
 export function Footer() {
     const productTypes = getAllProductTypes();
-    const { authData } = useAppSelector(state => state.auth);
-
-    const menuLinkByRole = hasAuthData(authData) && canManage(authData)
-        ? links.manager.menuWithProductType
-        : links.menu.menuWithProductType;
+    const { renderMenu, menuLinksBuilder } = useRoleAppConfig();
 
     return (
-        <Container
-            component='footer'
-        >
-            <div className={styles.footer}>
-                <div>
+        <footer className={styles.footer}>
+            <Container>
+                <div className={styles['footer-body']}>
                     <Logo />
-                </div>
-                <MenuList
-                    title={'Меню'}
-                    className={styles["menu"]}
-                >
-                    <div className={styles['menu-items']}>
-                        {productTypes.map(t => (
-                            <NavigationLink
-                                label={getStringByProductType(t)}
-                                link={menuLinkByRole(t)}
-                                className={styles['menu-items-item']}
-                            />
-                        ))}
+                    <MenuList
+                        title={'Меню'}
+                        className={styles["menu"]}
+                    >
+                        {renderMenu && (
+                            <div className={styles['menu-items']}>
+                                {productTypes.map(t => (
+                                    <NavigationLink
+                                        key={t}
+                                        label={getStringByProductType(t)}
+                                        link={menuLinksBuilder!(t)}
+                                        className={styles['menu-item']}
+                                    />
+                                ))}
+                            </div>
+                        )}
+                    </MenuList>
+                    <div className={styles["contacts"]}>
                     </div>
-                </MenuList>
-                <div className={styles["contacts"]}>
-
+                    <div className={styles["social-networks"]}>
+                    </div>
                 </div>
-                <div className={styles["social-networks"]}>
-
-                </div>
-            </div>
-        </Container>
+            </Container>
+        </footer>
     );
 }

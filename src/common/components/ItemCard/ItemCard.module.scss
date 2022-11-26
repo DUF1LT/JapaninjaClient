@@ -1,0 +1,8 @@
+@import "src/assets/dimensions.scss";
+@import "src/assets/palette.scss";
+
+.item-card {
+    background-color: $true-black-color;
+    border-radius: 15px;
+    padding: 33px 36.5px;
+}

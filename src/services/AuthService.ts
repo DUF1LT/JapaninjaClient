@@ -11,7 +11,7 @@ import { Error } from "./types";
 export class AuthService {
     static async login(email: string, password: string): Promise<AuthData | Error> {
         try {
-            const response = await $api.post<AuthData>(endpoints.login, { email, password });
+            const response = await $api.post<AuthData>(endpoints.auth.login, { email, password });
 
             return response.data as AuthData;
         } catch (error) {
@@ -29,7 +29,7 @@ export class AuthService {
 
     static async register(email: string, password: string, confirmPassword: string): Promise<AuthData | Error> {
         try {
-            const response = await $api.post<AuthData>(endpoints.register, { email, password, confirmPassword });
+            const response = await $api.post<AuthData>(endpoints.auth.register, { email, password, confirmPassword });
 
             return response.data as AuthData;
         } catch (error) {

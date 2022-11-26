@@ -7,6 +7,7 @@ export const managerTabsStyles: SxProps = {
         backgroundColor: Colors.Black,
         color: Colors.White,
         fontSize: 'inherit',
+        fontWeight: 500,
         fontFamily: 'inherit',
         border: `1px solid ${Colors.White}`,
     },

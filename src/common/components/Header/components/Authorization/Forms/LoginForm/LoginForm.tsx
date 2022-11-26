@@ -8,8 +8,8 @@ import { Button } from 'common/components/Button';
 import { TextField } from 'common/components/Form/TextField';
 import { useLogin } from 'common/helpers/login/useLogin';
 import { AuthData } from 'models/response/AuthData';
+import { dialogStyles } from 'common/components/Form/styles';
 
-import { formStyles } from '../styles';
 import { LoginFormFields, LoginFormPayload } from './types';
 
 import styles from './LoginForm.module.scss';
@@ -47,7 +47,7 @@ export function LoginForm({
             open={isOpen}
             onClose={onClose}
             PaperProps={{
-                style: formStyles
+                style: dialogStyles
             }}
             classes={{
                 paper: styles['login-form-modal-paper'],

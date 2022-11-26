@@ -5,10 +5,11 @@ export const links = {
     aboutUs: 'about-us',
     manager: {
         root: 'manager',
-        menuWithProductType: (type: ProductType) => `manager/menu?type=${type}`,
+        menu: 'manager/menu',
+        menuWithProductType: (type: ProductType) => `manager/menu?productType=${type}`,
     },
     menu: {
         root: 'menu',
-        menuWithProductType: (type: ProductType) => `menu?type=${type}`,
+        menuWithProductType: (type: ProductType) => `menu?productType=${type}`,
     }
 }

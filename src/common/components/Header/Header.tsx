@@ -1,25 +1,24 @@
 import { Container, Divider } from "@mui/material";
-import { canManage, hasAuthData } from "common/helpers/auth/authHelpers";
+
 import { getAllProductTypes } from "models/domain/helpers/getAllProductTypes";
 import { getStringByProductType } from "models/domain/helpers/getStringByProductType";
-import { useAppSelector } from "store/hooks";
-import { Colors } from "../../../assets/colors";
+import { Colors } from 'assets/colors';
+import { localization } from 'resources';
+import { useRoleAppConfig } from "common/hooks/useRoleAppConfig";
+import { useSelectedMenuType } from "common/hooks/useSelectedMenuType";
 
-import { links, localization } from "../../../resources";
+import { Authorization } from "./components/Authorization/Authorization";
+
 import { Button } from "../Button";
 import { Logo } from "../Logo";
-import { NavigationLink } from "../NavigationLink";
-import { Authorization } from "./components/Authorization/Authorization";
+import { NavigationLink, NavigationLinkType } from "../NavigationLink";
 
 import styles from './Header.module.scss';
 
 export function Header() {
     const productTypes = getAllProductTypes();
-    const { authData } = useAppSelector(state => state.auth);
-
-    const menuLinkByRole = hasAuthData(authData) && canManage(authData)
-        ? links.manager.menuWithProductType
-        : links.menu.menuWithProductType;
+    const { haveBusket, renderMenu, menuLinksBuilder } = useRoleAppConfig();
+    const selectedMenuType = useSelectedMenuType();
 
     return (
         <Container
@@ -35,20 +34,25 @@ export function Header() {
                     <div className={styles['tools-logo-and-search']}>
                         <Logo />
                     </div>
-                    <div className={styles['tools-phone-and-basket']}>
-                        <Button filled>
-                            {localization.basket}
-                        </Button>
+                    {haveBusket && (
+                        <div className={styles['tools-phone-and-basket']}>
+                            <Button filled>
+                                {localization.basket}
+                            </Button>
+                        </div>
+                    )}
+                </div>
+                {renderMenu && (
+                    <div className={styles['header-menu']}>
+                        {productTypes.map(t => (
+                            <NavigationLink
+                                label={getStringByProductType(t)}
+                                link={menuLinksBuilder!(t)}
+                                type={t === selectedMenuType ? NavigationLinkType.Hightlighted : NavigationLinkType.Default}
+                            />
+                        ))}
                     </div>
-                </div>
-                <div className={styles['header-menu']}>
-                    {productTypes.map(t => (
-                        <NavigationLink
-                            label={getStringByProductType(t)}
-                            link={menuLinkByRole(t)}
-                        />
-                    ))}
-                </div>
+                )}
             </div>
         </Container>
     );

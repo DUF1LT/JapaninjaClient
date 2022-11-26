@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { createTheme, ThemeProvider } from '@mui/material';
+
+import { Colors } from 'assets/colors';
 
 import { store } from './store';
 import { App } from './App';
@@ -13,12 +16,27 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: Colors.White,
+      dark: Colors.White,
+      light: Colors.White
+    },
+    secondary: {
+      main: Colors.Red,
+    }
+  },
+});
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ThemeProvider>
     </Provider>
   </React.StrictMode>
 );

@@ -2,18 +2,19 @@ import React from 'react';
 import * as Yup from 'yup';
 import YupPassword from 'yup-password';
 import { Dialog, DialogTitle } from '@mui/material';
+import { Form, Formik } from 'formik';
 
 import { AuthData } from "models/response/AuthData";
 import { localization } from "resources";
-
-import { RegisterFormFields, RegisterFormPayload } from "./types";
-import { formStyles } from '../styles';
-
-import styles from './RegistrationForm.module.scss';
-import { Form, Formik } from 'formik';
+import { dialogStyles } from 'common/components/Form/styles';
 import { TextField } from 'common/components/Form/TextField';
 import { Button } from 'common/components/Button';
 import { useRegister } from 'common/helpers/login/useRegister';
+
+import { RegisterFormFields, RegisterFormPayload } from "./types";
+
+import styles from './RegistrationForm.module.scss';
+
 YupPassword(Yup);
 
 export type RegisterFormProps = {
@@ -64,7 +65,7 @@ export function RegistrationForm({
             open={isOpen}
             onClose={onClose}
             PaperProps={{
-                style: formStyles
+                style: dialogStyles
             }}
             classes={{
                 paper: styles['registration-form-modal-paper'],

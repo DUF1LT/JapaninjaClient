@@ -8,26 +8,23 @@ import { getEnumMembers } from "common/helpers/getEnumMembers";
 import { ManagerPanelTab } from "./ManagerPanelTab";
 import { CouriersPanel } from "./components/CouriersPanel";
 import { OrdersPanel } from "./components/OrdersPanel";
-import { DishesPanel } from "./components/DishesPanel";
 
 import { managerTabsStyles } from './styles';
-import styles from './ManagerPage.module.scss';
+import styles from './ManagerPanel.module.scss';
 
 const managerPanelTabToLabel: Record<ManagerPanelTab, string> = {
     [ManagerPanelTab.Couriers]: localization.couriers,
     [ManagerPanelTab.Orders]: localization.orders,
-    [ManagerPanelTab.Dishes]: localization.dishes,
 };
 
 const managerPanelTabToTabElement: Record<ManagerPanelTab, React.ReactNode> = {
     [ManagerPanelTab.Couriers]: <CouriersPanel />,
     [ManagerPanelTab.Orders]: <OrdersPanel />,
-    [ManagerPanelTab.Dishes]: <DishesPanel />,
 };
 
 const managerPanelTabs = getEnumMembers(ManagerPanelTab).filter(Number.isFinite) as ManagerPanelTab[];
 
-export function ManagerPage() {
+export function ManagerPanel() {
     const [tab, setTab] = useState<ManagerPanelTab>(ManagerPanelTab.Orders);
 
     return (

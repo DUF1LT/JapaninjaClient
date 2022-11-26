@@ -2,12 +2,20 @@
 @import "src/assets/dimensions.scss";
 
 .footer {
-    display: flex;
+    background-color: $true-black-color;
 
-    gap: 10%;
+    padding: 40px 0;
 
-    left: 0;
-    bottom: 0;
+    &-body {
+        display: flex;
+        flex-direction: row;
+
+        gap: 10%;
+    
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
 }
 
 .menu {
@@ -17,20 +25,22 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-column-gap: 50px;
+    }
 
-        &-item {
-            display: block;
+    &-item {
+        display: block;
 
-            font-size: $font-extra-small;
+        font-size: $font-extra-small;
 
-            margin: 5px 0;
-        }
+        margin: 5px 0;
     }
 }
 
 @media (max-width: 650px) {
     .footer {
         display: flex;
+
+        padding: 0;
 
         flex-direction: column;
         align-items: center;

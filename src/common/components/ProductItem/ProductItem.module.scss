@@ -1,0 +1,43 @@
+@import "src/assets/dimensions.scss";
+@import "src/assets/palette.scss";
+
+.product-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    max-width: 320px;
+    height: 440px;
+    gap: 10px;
+
+    &-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 20px;
+        font-size: $font-medium;
+        font-weight: 600;
+    }
+
+    &-description {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    &-weight {
+        width: 100%;
+        font-weight: 300;
+    }
+
+    &-image {
+        width: 210px;
+        height: 140px;
+        object-fit: contain;
+    }
+
+    &-actions {
+        width: 100%;
+        padding: 5px;
+    }
+}

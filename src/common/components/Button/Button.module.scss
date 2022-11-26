@@ -5,6 +5,11 @@
     width: auto;
     box-sizing: content-box;
     
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
     font-family: inherit;
     font-size: $font-small;
     color: $white-color;

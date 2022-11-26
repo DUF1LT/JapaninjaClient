@@ -11,3 +11,14 @@
         color: $red-color;
     }
 }
+
+.form-radio-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.form-field .form-radio-group-option {
+    color: $white-color;
+}

@@ -1,0 +1,26 @@
+@import "src/assets/palette.scss";
+
+.image-picker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+
+    &-image {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+    }
+
+    &-input {
+        display: none;
+
+        &-label {
+            cursor: pointer;
+            transition: 0.1s ease-in;
+        }
+        &-label:hover {
+            color: $red-color
+        }
+    }
+}

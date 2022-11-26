@@ -11,6 +11,10 @@
     &__small {
         font-size: $font-extra-small;
     }
+
+    &-highlighted {
+        color: $red-color;
+    }
 }
 
 .navigation-link:before {

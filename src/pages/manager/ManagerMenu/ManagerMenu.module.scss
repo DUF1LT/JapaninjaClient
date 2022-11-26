@@ -1,0 +1,33 @@
+.manager-menu {
+    display: flex;
+    flex-direction: column;
+
+    padding: 70px 0;
+
+    column-gap: 30px;
+
+    &-header {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    &-stub {
+        padding: 50px 0;
+        text-align: center;
+    }
+
+    &-body {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-column-gap: 35px;
+        grid-row-gap: 35px;
+        padding-top: 50px;
+    }
+}
+
+.product-item-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}

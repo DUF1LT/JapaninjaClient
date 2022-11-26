@@ -1,13 +1,13 @@
 import { canManage } from "common/helpers/auth/authHelpers";
 import { RedirectUnauthorized } from "common/hoc"
-import { ManagerPage } from "./ManagerPage";
+import { ManagerPanel } from "./ManagerPanel";
 
-export function ManagerPageContainer() {
+export function ManagerPanelContainer() {
     return (
         <RedirectUnauthorized
             checkIfAuthorized={canManage}
         >
-            <ManagerPage />
+            <ManagerPanel />
         </RedirectUnauthorized>
     );
 }
