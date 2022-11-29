@@ -1,48 +1,32 @@
-import { useCallback, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 
 import { AuthService } from "services/AuthService";
 import { AuthData } from "models/response/AuthData";
 import { RegisterFormPayload } from "common/components/Header/components/Authorization/Forms/RegistrationForm/types";
-import { localization } from "resources";
+import { Error } from "services/types";
 
-type Result = [
+import { loginQueries } from "./loginQueries";
+
+type Result = {
     onRegister: (payload: RegisterFormPayload) => void,
     isLoading: boolean,
     error: string | null,
-];
+};
 
 export const useRegister = (
     onSuccess: (authData: AuthData) => void
 ): Result => {
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string>('');
+    const { mutate, isLoading, error } = useMutation<AuthData, Error, RegisterFormPayload>(
+        loginQueries.register,
+        (registerData: RegisterFormPayload) => AuthService.register(registerData.email, registerData.password, registerData.repeatPassword),
+        {
+            onSuccess: onSuccess,
+        },
+    );
 
-    const onRegister = useCallback(async (payload: RegisterFormPayload) => {
-        setError('');
-        setIsLoading(true);
-
-        const { email, password, repeatPassword } = payload;
-
-
-        try {
-            const registerResult = await AuthService.register(email, password, repeatPassword);
-
-            if ('error' in registerResult) {
-                setIsLoading(false);
-                setError(registerResult.error)
-
-                return;
-            }
-
-            setIsLoading(false);
-            onSuccess?.(registerResult);
-        }
-        catch (e) {
-            setIsLoading(false);
-            setError(localization.somethingWentWrong)
-        }
-
-    }, [onSuccess]);
-
-    return [onRegister, isLoading, error];
+    return {
+        onRegister: mutate,
+        isLoading,
+        error: error?.error ?? null,
+    };
 }

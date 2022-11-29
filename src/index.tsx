@@ -10,6 +10,7 @@ import { store } from './store';
 import { App } from './App';
 
 import './index.scss';
+import { QueryClientProvider } from 'common/helpers/reactQuery/QueryClientProvider';
 
 
 const root = ReactDOM.createRoot(
@@ -32,11 +33,13 @@ const theme = createTheme({
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </ThemeProvider>
+      <QueryClientProvider>
+        <ThemeProvider theme={theme}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ThemeProvider>
+      </QueryClientProvider>
     </Provider>
   </React.StrictMode>
 );

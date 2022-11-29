@@ -12,6 +12,7 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 export function Button({
+    className,
     filled,
     isLoading,
     children,
@@ -19,7 +20,7 @@ export function Button({
 }: ButtonProps) {
     return (
         <button
-            className={classNames(styles.button, {
+            className={classNames(className, styles.button, {
                 [styles['button__filled']]: filled && !isLoading,
                 [styles['button__loading']]: isLoading,
             })}

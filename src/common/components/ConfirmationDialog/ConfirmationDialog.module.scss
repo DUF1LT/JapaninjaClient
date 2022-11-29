@@ -7,7 +7,7 @@
     }
     
     &-paper {
-        width: calc($modal-windown-width - 200px);
+        width: calc($modal-windown-width + 200px);
         height: auto;
         
         background-color: $black-color;
@@ -23,12 +23,13 @@
 
         gap: 15px;
 
-        padding: 30px 65px 60px 65px;
+        padding: 30px 30px 30px 30px;
     }
 
     
     &-buttons {
         display: flex;
+        width: 50%;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;

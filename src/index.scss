@@ -1,38 +1,38 @@
 @import "src/assets/palette.scss";
 
 @font-face {
-  font-family: 'Jost-Light';
+  font-family: 'Jost';
   src: url('./common/fonts/Jost-Light.ttf');
   font-weight: 300;
 }
 
 @font-face {
-  font-family: 'Jost-Regular';
+  font-family: 'Jost';
   src: url('./common/fonts/Jost-Regular.ttf');
   font-weight: 400;
 }
 
 @font-face {
-  font-family: 'Jost-Medium';
+  font-family: 'Jost';
   src: url('./common/fonts/Jost-Medium.ttf');
   font-weight: 500;
 }
 
 @font-face {
-  font-family: 'Jost-SemiBold';
+  font-family: 'Jost';
   src: url('./common/fonts/Jost-SemiBold.ttf');
   font-weight: 600;
 }
 
 @font-face {
-  font-family: 'Jost-Bold';
+  font-family: 'Jost';
   src: url('./common/fonts/Jost-Bold.ttf');
   font-weight: 700;
 }
 
 body {
   margin: 0;
-  font-family: 'Jost-Regular';
+  font-family: 'Jost';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   

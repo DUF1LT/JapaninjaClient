@@ -6,6 +6,7 @@ const API_URL = 'https://localhost:2472/api';
 const $api = axios.create({
     withCredentials: true,
     baseURL: API_URL,
+    timeout: 10000,
 });
 
 $api.interceptors.request.use(config => {
@@ -20,10 +21,14 @@ const endpoints = {
     },
     manager: {
     },
+    couriers: {
+        root: '/couriers',
+        withId: (id: string) => `/couriers/${id}`,
+    },
     products: {
-        products: `/products`,
-        productsWithId: (id: string) => `/products/${id}`,
-        productsOfType: (type: ProductType) => `/products?type=${type}`,
+        root: `/products`,
+        withId: (id: string) => `/products/${id}`,
+        ofType: (type: ProductType) => `/products?type=${type}`,
     }
 };
 

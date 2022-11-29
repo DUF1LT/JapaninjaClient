@@ -1,42 +1,28 @@
-import { useEffect, useMemo, useState } from "react";
-
 import { Product } from "models/domain/Product";
 import { ProductType } from "models/domain/ProductType";
 import { ProductsService } from "services/ProductsService";
+import { useQuery } from "@tanstack/react-query";
+import { Error } from "services/types";
 
-type Result = [
+import { productsQueries } from "./productsQueries";
+
+type Result = {
     products: Product[],
     isLoading: boolean,
     error: string | null,
-]
+};
 
-export function useProducts(type?: ProductType | null, dependencies?: boolean[]): Result {
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [products, setProducts] = useState<Product[]>([]);
-    const [error, setError] = useState<string>('');
+export function useProducts(type?: ProductType | null): Result {
+    const { data, isLoading, error } = useQuery<Product[], Error>(
+        productsQueries.type(type),
+        () => ProductsService.getProducts(type),
+        {
+            keepPreviousData: true,
+        });
 
-    const useEffectDeps = useMemo(() => [type, ...(dependencies ?? [])], [type, dependencies]);
-
-    useEffect(() => {
-        const getProducts = async () => {
-            setError('');
-            setIsLoading(true);
-
-            var result = await ProductsService.getProducts(type);
-
-            if ('error' in result) {
-                setError(result.error);
-                setIsLoading(false);
-
-                return;
-            }
-
-            setProducts(result);
-            setIsLoading(false);
-        }
-
-        getProducts();
-    }, useEffectDeps);
-
-    return [products, isLoading, error];
+    return {
+        products: data ?? [],
+        isLoading,
+        error: error?.error ?? null,
+    };
 }

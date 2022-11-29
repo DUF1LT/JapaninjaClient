@@ -2,10 +2,10 @@
 @import "src/assets/dimensions.scss";
 
 .logo {
-    font-family: 'Jost-SemiBold';
     color: $white-color;
     font-size: $font-big;
     text-decoration: none;
+    font-weight: 600;
 
     &-red {
         color: $red-color;

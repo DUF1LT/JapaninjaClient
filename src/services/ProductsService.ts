@@ -7,14 +7,13 @@ import { ErrorResponse } from "models/response/ErrorResponse";
 import { Product } from "models/domain/Product";
 
 import { createError, getErrorByErrorType } from "./utils";
-import { Error } from "./types";
 import { ProductType } from "models/domain/ProductType";
 
 
 export class ProductsService {
-    static async getProducts(type?: ProductType | null): Promise<Product[] | Error> {
+    static async getProducts(type?: ProductType | null): Promise<Product[]> {
         try {
-            var response = await $api.get<Product[]>(type ? endpoints.products.productsOfType(type) : endpoints.products.products);
+            var response = await $api.get<Product[]>(type ? endpoints.products.ofType(type) : endpoints.products.root);
             var products = response.data;
 
             return products;
@@ -24,10 +23,10 @@ export class ProductsService {
             if (axiosErorr.isAxiosError) {
                 const errorData = axiosErorr.response?.data as ErrorResponse;
 
-                return getErrorByErrorType(errorData.error);
+                throw getErrorByErrorType(errorData?.error);
             }
 
-            return createError(localization.somethingWentWrong);
+            throw createError(localization.somethingWentWrong);
         }
     }
 }

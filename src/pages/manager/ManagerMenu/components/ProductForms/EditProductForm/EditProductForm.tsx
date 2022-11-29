@@ -46,25 +46,25 @@ const validationSchema = Yup.object({
     [ProductFormFields.Name]: Yup.string().max(
         formConstraints.nameMaxLength,
         localization.nameCanBeMaxLength(formConstraints.nameMaxLength)
-    ).required(localization.pleaseEnterName),
+    ).required(localization.enterName),
     [ProductFormFields.Description]: Yup.string().max(
         formConstraints.descriptionMaxLength,
         localization.descriptionCanBeMaxLength(formConstraints.descriptionMaxLength)
-    ).required(localization.pleaseEnterDescription),
+    ).required(localization.enterDescription),
     [ProductFormFields.Weight]: Yup.string().max(
         formConstraints.weightMaxLength,
         localization.weightCanBeMaxLength(formConstraints.weightMaxLength)
-    ).required(localization.pleaseEnterWeight),
+    ).required(localization.enterWeight),
     [ProductFormFields.Price]: Yup.number()
         .moreThan(formConstraints.price.min, localization.priceShouldBeMoreThan(formConstraints.price.min))
         .lessThan(formConstraints.price.max, localization.priceShouldBeLessThan(formConstraints.price.max))
-        .required(localization.pleaseEnterPrice),
+        .required(localization.enterPrice),
     [ProductFormFields.Spiciness]: Yup.mixed<SpicinessType>().oneOf(Object.values(SpicinessType)),
     [ProductFormFields.Ingredients]: Yup.string().max(
         formConstraints.ingredientsMaxLength,
         localization.ingredientsCanBeMaxLength(formConstraints.ingredientsMaxLength)
-    ).required(localization.pleaseEnterPassword),
-    [ProductFormFields.Image]: Yup.string().required(localization.pleasePickImage),
+    ).required(localization.enterPassword),
+    [ProductFormFields.Image]: Yup.string().required(localization.pickImage),
 });
 
 const spicinessOptions: RadioOption[] = getEnumMembers(SpicinessType).map(t => ({
@@ -79,7 +79,7 @@ export function EditProductForm({
     onClose,
     onSuccessfulEdit,
 }: Props) {
-    const [onEditProduct, isLoading, error] = useEditProduct(onSuccessfulEdit);
+    const { onEditProduct, isLoading, error } = useEditProduct(onSuccessfulEdit);
 
     const formInitialValues = useMemo(() => ({
         [ProductFormFields.Id]: product?.id ?? '',

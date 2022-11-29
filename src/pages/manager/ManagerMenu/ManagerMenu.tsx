@@ -29,9 +29,10 @@ export function ManagerMenu() {
     const [isEditProductFormModalOpen, setIsEditProductFormModalOpen] = useState<boolean>(false);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
 
-    const [products, isLoading] = useProducts(selectedType, [isCreateProductFormModalOpen, isEditProductFormModalOpen, isDeleteDialogOpen]);
-    const [onDeleteProduct] = useDeleteProduct(() => setIsDeleteDialogOpen(false));
-    const isProductsLoading = useDelayedFlag(200, [isLoading]);
+    const { products, isLoading } = useProducts(selectedType);
+    const isProductsLoading = useDelayedFlag(300, [isLoading]);
+
+    const { onDeleteProduct } = useDeleteProduct(() => setIsDeleteDialogOpen(false));
 
     const renderProductItemActions = (product: Product) => (
         <div className={styles['product-item-actions']}>
@@ -112,7 +113,7 @@ export function ManagerMenu() {
                 onSuccessfulEdit={() => setIsEditProductFormModalOpen(false)}
             />
             <ConfirmationDialog
-                title={localization.areYouSureYouWantToDelete}
+                title={localization.areYouSureYouWantToDeleteProduct}
                 isDialogOpen={isDeleteDialogOpen}
                 onClose={() => setIsDeleteDialogOpen(false)}
                 onNo={() => setIsDeleteDialogOpen(false)}

@@ -13,6 +13,7 @@ import { dialogStyles } from 'common/components/Form/styles';
 import { LoginFormFields, LoginFormPayload } from './types';
 
 import styles from './LoginForm.module.scss';
+import { useDelayedFlag } from 'common/hooks/useDelayedFlag';
 
 export type LoginFormProps = {
     className?: string;
@@ -28,8 +29,8 @@ const initialValues: LoginFormPayload = {
 };
 
 const validationSchema = Yup.object({
-    [LoginFormFields.Email]: Yup.string().email(localization.pleaseEnterValidEmail).required(localization.pleaseEnterEmail),
-    [LoginFormFields.Password]: Yup.string().required(localization.pleaseEnterPassword),
+    [LoginFormFields.Email]: Yup.string().email(localization.enterValidEmail).required(localization.enterEmail),
+    [LoginFormFields.Password]: Yup.string().required(localization.enterPassword),
 });
 
 export function LoginForm({
@@ -39,7 +40,8 @@ export function LoginForm({
     onRegisterLinkClick,
     isOpen
 }: LoginFormProps) {
-    const [onLogin, isLoading, error] = useLogin(onSuccesfulLogin);
+    const { onLogin, isLoading, error } = useLogin(onSuccesfulLogin);
+    const isDelayedLoading = useDelayedFlag(300, [isLoading ?? false])
 
     return (
         <Dialog
@@ -79,7 +81,8 @@ export function LoginForm({
 
                         <Button
                             filled
-                            isLoading={isLoading}
+                            disabled={isDelayedLoading}
+                            isLoading={isDelayedLoading}
                             type='submit'
                         >
                             {localization.enter}

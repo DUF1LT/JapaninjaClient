@@ -19,11 +19,11 @@ export function Footer() {
             <Container>
                 <div className={styles['footer-body']}>
                     <Logo />
-                    <MenuList
-                        title={'Меню'}
-                        className={styles["menu"]}
-                    >
-                        {renderMenu && (
+                    {renderMenu && (
+                        <MenuList
+                            title={'Меню'}
+                            className={styles["menu"]}
+                        >
                             <div className={styles['menu-items']}>
                                 {productTypes.map(t => (
                                     <NavigationLink
@@ -34,8 +34,8 @@ export function Footer() {
                                     />
                                 ))}
                             </div>
-                        )}
-                    </MenuList>
+                        </MenuList>
+                    )}
                     <div className={styles["contacts"]}>
                     </div>
                     <div className={styles["social-networks"]}>

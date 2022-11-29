@@ -1,5 +1,7 @@
-import { Button, Dialog, DialogTitle } from "@mui/material";
+import { Dialog, DialogTitle } from "@mui/material";
+import { useDelayedFlag } from "common/hooks/useDelayedFlag";
 import { localization } from "resources";
+import { Button } from "../Button";
 
 import { dialogStyles } from "../Form/styles";
 
@@ -12,6 +14,7 @@ interface Props {
     title: string
     onYes: () => void;
     onNo: () => void;
+    isLoading?: boolean;
 }
 
 export function ConfirmationDialog({
@@ -20,7 +23,10 @@ export function ConfirmationDialog({
     onNo,
     onYes,
     title,
+    isLoading,
 }: Props) {
+    const isDelayedLoading = useDelayedFlag(300, [isLoading ?? false])
+
     return (
         <Dialog
             open={isDialogOpen}
@@ -40,8 +46,19 @@ export function ConfirmationDialog({
                     {title}
                 </DialogTitle>
                 <div className={styles['confirmation-dialog-buttons']}>
-                    <Button onClick={onNo}>{localization.no}</Button>
-                    <Button onClick={onYes}>{localization.yes}</Button>
+                    <Button
+                        onClick={onNo}
+                        disabled={isDelayedLoading}
+                    >
+                        {localization.no}
+                    </Button>
+                    <Button
+                        onClick={onYes}
+                        disabled={isDelayedLoading}
+                        isLoading={isDelayedLoading}
+                    >
+                        {localization.yes}
+                    </Button>
                 </div>
             </div>
         </Dialog>

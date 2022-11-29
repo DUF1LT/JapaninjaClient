@@ -3,31 +3,16 @@ import { AxiosError } from "axios";
 import { localization } from "resources";
 import $api, { endpoints } from "api";
 
-import { ProductFormPayload } from "pages/manager/ManagerMenu/components/ProductForms/types";
 import { ErrorResponse } from "models/response/ErrorResponse";
+import { Courier } from "models/domain/Courier";
+import { RegisterCourierFormPayload } from "pages/manager/ManagerPanel/components/CouriersPanel/components/RegisterCourierForm/types";
 
 import { createError, getErrorByErrorType } from "./utils";
 
-export class ManagerService {
-    static async createProduct(productPayload: ProductFormPayload): Promise<void> {
+export class CouriersService {
+    static async registerCourier(payload: RegisterCourierFormPayload): Promise<void> {
         try {
-            await $api.post(endpoints.products.root, productPayload);
-        } catch (error) {
-            const axiosErorr = error as AxiosError;
-
-            if (axiosErorr.isAxiosError) {
-                const errorData = axiosErorr.response?.data as ErrorResponse;
-
-                throw getErrorByErrorType(errorData.error);
-            }
-
-            throw createError(localization.somethingWentWrong);
-        }
-    }
-
-    static async editProduct(productPayload: ProductFormPayload): Promise<void> {
-        try {
-            await $api.put(endpoints.products.withId(productPayload.id!), productPayload);
+            await $api.post(endpoints.couriers.root, payload);
         } catch (error) {
             const axiosErorr = error as AxiosError;
 
@@ -41,10 +26,30 @@ export class ManagerService {
         }
     }
 
-    static async deleteProduct(id: string): Promise<void> {
+    static async fireCourier(id: string): Promise<void> {
         try {
-            await $api.delete(endpoints.products.withId(id));
+            await $api.delete(endpoints.couriers.withId(id));
         } catch (error) {
+            const axiosErorr = error as AxiosError;
+
+            if (axiosErorr.isAxiosError) {
+                const errorData = axiosErorr.response?.data as ErrorResponse;
+
+                throw getErrorByErrorType(errorData?.error);
+            }
+
+            throw createError(localization.somethingWentWrong);
+        }
+    }
+
+    static async getCouriers(): Promise<Courier[]> {
+        try {
+            var result = await $api.get(endpoints.couriers.root);
+
+            return result.data;
+        } catch (error) {
+            debugger;
+
             const axiosErorr = error as AxiosError;
 
             if (axiosErorr.isAxiosError) {

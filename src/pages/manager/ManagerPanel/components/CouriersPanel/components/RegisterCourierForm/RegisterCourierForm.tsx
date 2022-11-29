@@ -4,16 +4,15 @@ import YupPassword from 'yup-password';
 import { Dialog, DialogTitle } from '@mui/material';
 import { Form, Formik } from 'formik';
 
-import { AuthData } from "models/response/AuthData";
 import { localization } from "resources";
 import { dialogStyles } from 'common/components/Form/styles';
 import { TextField } from 'common/components/Form/TextField';
 import { Button } from 'common/components/Button';
-import { useRegister } from 'common/helpers/login/useRegister';
 
-import { RegisterFormFields, RegisterFormPayload } from "./types";
+import { RegisterCourierFormFields, RegisterCourierFormPayload } from "./types";
 
-import styles from './RegistrationForm.module.scss';
+import styles from './RegisterCourierForm.module.scss';
+import { useRegisterCourier } from 'common/helpers/couriers/useRegisterCourier';
 
 YupPassword(Yup);
 
@@ -21,14 +20,15 @@ export type RegisterFormProps = {
     className?: string;
     isOpen: boolean;
     onClose: () => void;
-    onSuccesfulRegister: (authData: AuthData) => void;
-    onLoginLinkClick: () => void;
+    onSuccesfulRegister?: () => void;
 };
 
-const initialValues: RegisterFormPayload = {
-    [RegisterFormFields.Email]: '',
-    [RegisterFormFields.Password]: '',
-    [RegisterFormFields.RepeatPassword]: '',
+const initialValues: RegisterCourierFormPayload = {
+    [RegisterCourierFormFields.Name]: '',
+    [RegisterCourierFormFields.Phone]: '',
+    [RegisterCourierFormFields.Email]: '',
+    [RegisterCourierFormFields.Password]: '',
+    [RegisterCourierFormFields.RepeatPassword]: '',
 };
 
 const formConstraints = {
@@ -39,25 +39,27 @@ const formConstraints = {
 }
 
 const validationSchema = Yup.object({
-    [RegisterFormFields.Email]: Yup.string().email(localization.enterValidEmail).required(localization.enterEmail),
-    [RegisterFormFields.Password]: Yup.string().required(localization.pleaseRepeatPassword)
+    [RegisterCourierFormFields.Name]: Yup.string().required(localization.enterPersonName),
+    [RegisterCourierFormFields.Phone]: Yup.string().required(localization.enterPhone),
+    [RegisterCourierFormFields.Email]: Yup.string().email(localization.enterValidEmail).required(localization.enterEmail),
+    [RegisterCourierFormFields.Email]: Yup.string().email(localization.enterValidEmail).required(localization.enterEmail),
+    [RegisterCourierFormFields.Password]: Yup.string().required(localization.enterPassword)
         .min(formConstraints.length, localization.passwordsShouldHaveMinLength(formConstraints.length))
         .minLowercase(formConstraints.minLowerCase, localization.passwordsShouldHaveAtLeastLower(formConstraints.minLowerCase))
         .minUppercase(formConstraints.minUpperCase, localization.passwordsShouldHaveAtLeastUpper(formConstraints.minUpperCase))
         .minNumbers(formConstraints.minNumber, localization.passwordsShouldHaveAtLeastNumber(formConstraints.minNumber)),
-    [RegisterFormFields.RepeatPassword]: Yup.string()
+    [RegisterCourierFormFields.RepeatPassword]: Yup.string()
         .required(localization.repeatPassword)
-        .oneOf([Yup.ref(RegisterFormFields.Password), null], localization.passwordsShouldMatch)
+        .oneOf([Yup.ref(RegisterCourierFormFields.Password), null], localization.passwordsShouldMatch)
 });
 
-export function RegistrationForm({
+export function RegisterCourierForm({
     isOpen,
     onClose,
     onSuccesfulRegister,
-    onLoginLinkClick,
     className
 }: RegisterFormProps) {
-    const { onRegister, isLoading, error } = useRegister(onSuccesfulRegister);
+    const { onRegisterCourier, isLoading, error } = useRegisterCourier(onSuccesfulRegister);
 
     return (
         <Dialog
@@ -68,35 +70,45 @@ export function RegistrationForm({
                 style: dialogStyles
             }}
             classes={{
-                paper: styles['registration-form-modal-paper'],
+                paper: styles['register-courier-form-modal-paper'],
             }}
         >
-            <div className={styles['registration-form-modal-content']}>
+            <div className={styles['register-courier-form-modal-content']}>
                 <DialogTitle
                     fontFamily='inherit'
                     fontSize={24}
                 >
-                    {localization.registration}
+                    {localization.courierRegistration}
                 </DialogTitle>
                 <Formik
                     initialValues={initialValues}
-                    onSubmit={onRegister}
+                    onSubmit={onRegisterCourier}
                     validationSchema={validationSchema}
                 >
-                    <Form className={styles['registration-form']}>
+                    <Form className={styles['register-courier-form']}>
                         <TextField
-                            name={RegisterFormFields.Email}
+                            name={RegisterCourierFormFields.Name}
+                            placeholder={localization.personName}
+                        />
+
+                        <TextField
+                            name={RegisterCourierFormFields.Phone}
+                            placeholder={localization.phone}
+                        />
+
+                        <TextField
+                            name={RegisterCourierFormFields.Email}
                             placeholder={localization.email}
                         />
 
                         <TextField
-                            name={RegisterFormFields.Password}
+                            name={RegisterCourierFormFields.Password}
                             type='password'
                             placeholder={localization.password}
                         />
 
                         <TextField
-                            name={RegisterFormFields.RepeatPassword}
+                            name={RegisterCourierFormFields.RepeatPassword}
                             type='password'
                             placeholder={localization.repeatPassword}
                         />
@@ -106,22 +118,16 @@ export function RegistrationForm({
                             isLoading={isLoading}
                             type='submit'
                         >
-                            {localization.register}
+                            {localization.toRegister}
                         </Button>
                         {error !== null &&
                             (
-                                <span className={styles['registration-form-error']}>
+                                <span className={styles['register-courier-form-error']}>
                                     {error}
                                 </span>
                             )}
                     </Form>
                 </Formik>
-                <span
-                    className={styles['registration-form-login']}
-                    onClick={onLoginLinkClick}
-                >
-                    {localization.authorization}
-                </span>
             </div>
         </Dialog>
     );

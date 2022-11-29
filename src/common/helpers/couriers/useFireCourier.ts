@@ -1,31 +1,30 @@
 import { useMutation } from "@tanstack/react-query";
 
-import { ManagerService } from "services/ManagerService";
+import { CouriersService } from "services/CouriersService";
 import { Error } from "services/types";
 
-import { managerQueries } from "./managerQueries";
+import { couriersQueries } from "./couriersQueries";
 
 type Result = {
-    onDeleteProduct: (id: string) => void,
+    onFireCourier: (id: string) => void,
     isLoading: boolean,
     error: string | null,
 };
 
-export function useDeleteProduct(
-    onSuccess: () => void,
-): Result {
+export const useFireCourier = (
+    onSuccess?: () => void
+): Result => {
     const { mutate, isLoading, error } = useMutation<void, Error, string>(
-        managerQueries.delete,
-        (id: string) => ManagerService.deleteProduct(id),
+        couriersQueries.fire,
+        (id: string) => CouriersService.fireCourier(id),
         {
             onSuccess: onSuccess,
         },
     );
 
-
     return {
-        onDeleteProduct: mutate,
+        onFireCourier: mutate,
         isLoading,
         error: error?.error ?? null,
     };
-};  
+}

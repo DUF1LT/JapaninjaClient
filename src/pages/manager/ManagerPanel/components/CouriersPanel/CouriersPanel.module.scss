@@ -1,0 +1,55 @@
+.couriers-panel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+
+    &-tabs {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+
+        flex: 1;
+    }
+
+    &-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        height: 160px;
+
+        width: 100%;
+
+        gap: 30px;
+
+        flex: 3;
+    }
+
+    &-header {
+        display: flex;
+        flex-direction: row;
+
+        justify-content: flex-end;
+        width: 100%;
+
+    }
+
+    &-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 20px;
+        width: 100%;
+        min-height: 200px;
+    }
+
+    &-tab {
+        width: 120px;
+    }
+
+    &-stub {
+        padding: 50px 0;
+        text-align: center;
+    }
+}

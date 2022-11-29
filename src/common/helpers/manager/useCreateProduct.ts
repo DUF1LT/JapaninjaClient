@@ -1,44 +1,31 @@
-import { useCallback, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 
 import { ProductFormPayload } from "pages/manager/ManagerMenu/components/ProductForms/types";
 import { ManagerService } from "services/ManagerService";
-import { localization } from "resources";
+import { Error } from "services/types";
 
-type Result = [
+import { managerQueries } from "./managerQueries";
+
+type Result = {
     onCreateProduct: (payload: ProductFormPayload) => void,
     isLoading: boolean,
     error: string | null,
-];
+};
 
 export function useCreateProduct(
     onSuccess: () => void,
 ): Result {
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string>('');
+    const { mutate, isLoading, error } = useMutation<void, Error, ProductFormPayload>(
+        managerQueries.create,
+        (payload: ProductFormPayload) => ManagerService.createProduct(payload),
+        {
+            onSuccess: onSuccess,
+        },
+    );
 
-    const onCreateProduct = useCallback(async (payload: ProductFormPayload) => {
-        setError('');
-        setIsLoading(true);
-
-        try {
-            const createProductResult = await ManagerService.createProduct(payload);
-
-            if (createProductResult !== true) {
-                setIsLoading(false);
-                setError(createProductResult.error)
-
-                return;
-            }
-
-            setIsLoading(false);
-            onSuccess?.();
-        }
-        catch (e) {
-            setIsLoading(false);
-            setError(localization.somethingWentWrong)
-        }
-
-    }, [onSuccess]);
-
-    return [onCreateProduct, isLoading, error];
+    return {
+        onCreateProduct: mutate,
+        isLoading,
+        error: error?.error ?? null,
+    };
 };  
