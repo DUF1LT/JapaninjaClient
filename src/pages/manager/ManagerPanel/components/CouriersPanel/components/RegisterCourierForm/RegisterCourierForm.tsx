@@ -39,18 +39,18 @@ const formConstraints = {
 }
 
 const validationSchema = Yup.object({
-    [RegisterCourierFormFields.Name]: Yup.string().required(localization.enterPersonName),
-    [RegisterCourierFormFields.Phone]: Yup.string().required(localization.enterPhone),
-    [RegisterCourierFormFields.Email]: Yup.string().email(localization.enterValidEmail).required(localization.enterEmail),
-    [RegisterCourierFormFields.Email]: Yup.string().email(localization.enterValidEmail).required(localization.enterEmail),
-    [RegisterCourierFormFields.Password]: Yup.string().required(localization.enterPassword)
-        .min(formConstraints.length, localization.passwordsShouldHaveMinLength(formConstraints.length))
+    [RegisterCourierFormFields.Name]: Yup.string().required(() => localization.enterPersonName),
+    [RegisterCourierFormFields.Phone]: Yup.string().required(() => localization.enterPhone),
+    [RegisterCourierFormFields.Email]: Yup.string().email(() => localization.enterValidEmail).required(localization.enterEmail),
+    [RegisterCourierFormFields.Email]: Yup.string().email(() => localization.enterValidEmail).required(localization.enterEmail),
+    [RegisterCourierFormFields.Password]: Yup.string().required(() => localization.enterPassword)
+        .min(formConstraints.length, () => localization.passwordsShouldHaveMinLength(formConstraints.length))
         .minLowercase(formConstraints.minLowerCase, localization.passwordsShouldHaveAtLeastLower(formConstraints.minLowerCase))
         .minUppercase(formConstraints.minUpperCase, localization.passwordsShouldHaveAtLeastUpper(formConstraints.minUpperCase))
         .minNumbers(formConstraints.minNumber, localization.passwordsShouldHaveAtLeastNumber(formConstraints.minNumber)),
     [RegisterCourierFormFields.RepeatPassword]: Yup.string()
-        .required(localization.repeatPassword)
-        .oneOf([Yup.ref(RegisterCourierFormFields.Password), null], localization.passwordsShouldMatch)
+        .required(() => localization.repeatPassword)
+        .oneOf([Yup.ref(RegisterCourierFormFields.Password), null], () => localization.passwordsShouldMatch)
 });
 
 export function RegisterCourierForm({

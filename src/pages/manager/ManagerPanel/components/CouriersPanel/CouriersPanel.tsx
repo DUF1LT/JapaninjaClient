@@ -13,10 +13,10 @@ import { Courier } from 'models/domain/Courier';
 import { useFireCourier } from 'common/helpers/couriers/useFireCourier';
 
 
-// const couriersPanelTabToLabel: Record<CouriersPanelTab, string> = {
-//     [CouriersPanelTab.All]: localization.all,
-//     [CouriersPanelTab.Delivering]: localization.delivering,
-//     [CouriersPanelTab.Free]: localization.free,
+// const couriersPanelTabToLabel: Record<CouriersPanelTab, () => string> = {
+//     [CouriersPanelTab.All]: () => localization.all,
+//     [CouriersPanelTab.Delivering]: () => localization.delivering,
+//     [CouriersPanelTab.Free]: () => localization.free,
 // };
 
 // const couriersPanelTabs = getEnumMembers(CouriersPanelTab).filter(Number.isFinite) as CouriersPanelTab[];

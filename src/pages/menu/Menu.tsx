@@ -2,6 +2,7 @@ import { Container } from "@mui/system";
 import { ProductItem } from "common/components/ProductItem";
 import { useProducts } from "common/helpers/products/useProducts";
 import { useSelectedMenuType } from "common/hooks/useSelectedMenuType";
+import { getStringByProductType } from "models/domain/helpers/getStringByProductType";
 import { localization } from "resources";
 
 import styles from './Menu.module.scss';
@@ -23,7 +24,7 @@ export function Menu() {
         if (products?.length === 0) {
             return (
                 <div className={styles['menu-stub']}>
-                    {localization.thereAreNoProducts}
+                    {localization.thereAreNoProductsOfType(getStringByProductType(selectedType!))}
                 </div>
             );
         }

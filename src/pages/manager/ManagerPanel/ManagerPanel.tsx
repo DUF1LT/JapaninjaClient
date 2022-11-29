@@ -12,9 +12,9 @@ import { OrdersPanel } from "./components/OrdersPanel";
 import { managerTabsStyles } from './styles';
 import styles from './ManagerPanel.module.scss';
 
-const managerPanelTabToLabel: Record<ManagerPanelTab, string> = {
-    [ManagerPanelTab.Couriers]: localization.couriers,
-    [ManagerPanelTab.Orders]: localization.orders,
+const managerPanelTabToLabel: Record<ManagerPanelTab, () => string> = {
+    [ManagerPanelTab.Couriers]: () => localization.couriers,
+    [ManagerPanelTab.Orders]: () => localization.orders,
 };
 
 const managerPanelTabToTabElement: Record<ManagerPanelTab, React.ReactNode> = {
@@ -43,7 +43,7 @@ export function ManagerPanel() {
                     {managerPanelTabs.map(t => (
                         <Tab
                             key={t}
-                            label={managerPanelTabToLabel[t]}
+                            label={managerPanelTabToLabel[t]()}
                             value={t}
                         />
                     ))}

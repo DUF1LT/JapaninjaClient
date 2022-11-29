@@ -12,10 +12,10 @@ import styles from './Authorization.module.scss';
 import { useNavigate } from "react-router-dom";
 import { NavigationLink } from "common/components/NavigationLink";
 
-const authDataRoleToString: Record<Role, string> = {
-    [Role.Manager]: localization.manager,
-    [Role.Customer]: localization.customer,
-    [Role.Courier]: localization.courier,
+const authDataRoleToString: Record<Role, () => string> = {
+    [Role.Manager]: () => localization.manager,
+    [Role.Customer]: () => localization.customer,
+    [Role.Courier]: () => localization.courier,
 }
 
 const authDataRoleToStartPage: Record<Role, string> = {
@@ -59,7 +59,7 @@ export function Authorization() {
                         <div className={styles['authorization-heading']}>
                             <NavigationLink
                                 link={authDataRoleToAccountLink[auth.authData.role!]}
-                                label={localization.hello(authDataRoleToString[auth.authData.role!])}
+                                label={localization.hello(authDataRoleToString[auth.authData.role!]())}
                             />
                             <Button onClick={onLogoutClick}>
                                 {localization.exit}

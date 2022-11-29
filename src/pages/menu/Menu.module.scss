@@ -1,14 +1,19 @@
 .menu {
+    min-height: 300px;
+    padding: 40px 0;
+
     &-filter {
 
     }   
 
     &-stub {
-
+        width: 100%;
+        text-align: center;
     }
 
     &-content {
-        width: 100%;
-        text-align: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 30px;
     }
 }

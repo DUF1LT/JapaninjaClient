@@ -39,15 +39,15 @@ const formConstraints = {
 }
 
 const validationSchema = Yup.object({
-    [RegisterFormFields.Email]: Yup.string().email(localization.enterValidEmail).required(localization.enterEmail),
-    [RegisterFormFields.Password]: Yup.string().required(localization.pleaseRepeatPassword)
-        .min(formConstraints.length, localization.passwordsShouldHaveMinLength(formConstraints.length))
+    [RegisterFormFields.Email]: Yup.string().email(() => localization.enterValidEmail).required(() => localization.enterEmail),
+    [RegisterFormFields.Password]: Yup.string().required(() => localization.pleaseRepeatPassword)
+        .min(formConstraints.length, () => localization.passwordsShouldHaveMinLength(formConstraints.length))
         .minLowercase(formConstraints.minLowerCase, localization.passwordsShouldHaveAtLeastLower(formConstraints.minLowerCase))
         .minUppercase(formConstraints.minUpperCase, localization.passwordsShouldHaveAtLeastUpper(formConstraints.minUpperCase))
         .minNumbers(formConstraints.minNumber, localization.passwordsShouldHaveAtLeastNumber(formConstraints.minNumber)),
     [RegisterFormFields.RepeatPassword]: Yup.string()
-        .required(localization.repeatPassword)
-        .oneOf([Yup.ref(RegisterFormFields.Password), null], localization.passwordsShouldMatch)
+        .required(() => localization.repeatPassword)
+        .oneOf([Yup.ref(RegisterFormFields.Password), null], () => localization.passwordsShouldMatch)
 });
 
 export function RegistrationForm({

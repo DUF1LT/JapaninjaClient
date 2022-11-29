@@ -7,7 +7,8 @@ import { localization } from 'resources';
 import { useRoleAppConfig } from "common/hooks/useRoleAppConfig";
 import { useSelectedMenuType } from "common/hooks/useSelectedMenuType";
 
-import { Authorization } from "./components/Authorization/Authorization";
+import { Authorization } from "./components/Authorization";
+import { Localization } from "./components/Localization";
 
 import { Button } from "../Button";
 import { Logo } from "../Logo";
@@ -17,7 +18,7 @@ import styles from './Header.module.scss';
 
 export function Header() {
     const productTypes = getAllProductTypes();
-    const { haveBusket, renderMenu, menuLinksBuilder } = useRoleAppConfig();
+    const { haveCart: haveBusket, renderMenu, menuLinksBuilder } = useRoleAppConfig();
     const selectedMenuType = useSelectedMenuType();
 
     return (
@@ -27,6 +28,7 @@ export function Header() {
         >
             <div className={styles['header-wrapper']}>
                 <nav className={styles.navigation}>
+                    <Localization />
                     <Authorization />
                 </nav>
                 <Divider color={Colors.LightBlack} className={styles.divider} />
@@ -37,7 +39,7 @@ export function Header() {
                     {haveBusket && (
                         <div className={styles['tools-phone-and-basket']}>
                             <Button filled>
-                                {localization.basket}
+                                {localization.cart}
                             </Button>
                         </div>
                     )}

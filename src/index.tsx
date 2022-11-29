@@ -5,12 +5,13 @@ import { Provider } from 'react-redux';
 import { createTheme, ThemeProvider } from '@mui/material';
 
 import { Colors } from 'assets/colors';
+import { QueryClientProvider } from 'common/helpers/reactQuery/QueryClientProvider';
+import { LocalizationContextProvider } from 'common/contexts/LocalizationContext';
 
 import { store } from './store';
 import { App } from './App';
 
 import './index.scss';
-import { QueryClientProvider } from 'common/helpers/reactQuery/QueryClientProvider';
 
 
 const root = ReactDOM.createRoot(
@@ -35,9 +36,11 @@ root.render(
     <Provider store={store}>
       <QueryClientProvider>
         <ThemeProvider theme={theme}>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
+          <LocalizationContextProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </LocalizationContextProvider>
         </ThemeProvider>
       </QueryClientProvider>
     </Provider>

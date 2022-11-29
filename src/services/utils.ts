@@ -6,10 +6,10 @@ export const createError = (error: string): Error => ({
     error,
 });
 
-const errorTypeToError: Record<ErrorType, Error> = {
-    [ErrorType.UserDoesNotExist]: createError(localization.userDoesNotExist),
-    [ErrorType.UserWithTheSameEmailAlreadyExist]: createError(localization.userAlreadyExists),
-    [ErrorType.PasswordIsInvalid]: createError(localization.wrongPassword),
+const errorTypeToError: Record<ErrorType, () => Error> = {
+    [ErrorType.UserDoesNotExist]: () => createError(localization.userDoesNotExist),
+    [ErrorType.UserWithTheSameEmailAlreadyExist]: () => createError(localization.userAlreadyExists),
+    [ErrorType.PasswordIsInvalid]: () => createError(localization.wrongPassword),
 }
 
-export const getErrorByErrorType = (errorType: ErrorType): Error => errorTypeToError[errorType] ?? createError(localization.somethingWentWrong);
+export const getErrorByErrorType = (errorType: ErrorType): Error => errorTypeToError[errorType]() ?? createError(localization.somethingWentWrong);

@@ -1,4 +1,5 @@
 import { SxProps } from "@mui/material";
+
 import { Colors } from "assets/colors";
 
 export const managerTabsStyles: SxProps = {

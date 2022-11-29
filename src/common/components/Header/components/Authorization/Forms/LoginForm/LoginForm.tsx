@@ -29,8 +29,8 @@ const initialValues: LoginFormPayload = {
 };
 
 const validationSchema = Yup.object({
-    [LoginFormFields.Email]: Yup.string().email(localization.enterValidEmail).required(localization.enterEmail),
-    [LoginFormFields.Password]: Yup.string().required(localization.enterPassword),
+    [LoginFormFields.Email]: Yup.string().email(() => localization.enterValidEmail).required(() => localization.enterEmail),
+    [LoginFormFields.Password]: Yup.string().required(() => localization.enterPassword),
 });
 
 export function LoginForm({

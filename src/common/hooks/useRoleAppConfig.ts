@@ -4,30 +4,30 @@ import { links } from "resources";
 import { useAppSelector } from "store/hooks";
 
 export type RoleAppConfig = {
-    haveBusket: boolean;
+    haveCart: boolean;
     renderMenu: boolean;
     menuLinksBuilder?: (type: ProductType) => string;
 }
 
 const unauthorizedAppConfig: RoleAppConfig = {
-    haveBusket: true,
+    haveCart: true,
     renderMenu: true,
     menuLinksBuilder: links.menu.menuWithProductType,
 };
 
 const roleAppConfig = new Map<Role | undefined, RoleAppConfig>([
     [Role.Manager, {
-        haveBusket: false,
+        haveCart: false,
         renderMenu: true,
         menuLinksBuilder: links.manager.menuWithProductType
     }],
     [Role.Customer, {
-        haveBusket: true,
+        haveCart: true,
         renderMenu: true,
         menuLinksBuilder: links.menu.menuWithProductType,
     }],
     [Role.Courier, {
-        haveBusket: false,
+        haveCart: false,
         renderMenu: false,
     }],
 ]);

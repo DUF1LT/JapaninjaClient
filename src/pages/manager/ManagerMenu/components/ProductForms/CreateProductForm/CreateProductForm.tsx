@@ -54,26 +54,26 @@ const formConstraints = {
 const validationSchema = Yup.object({
     [ProductFormFields.Name]: Yup.string().max(
         formConstraints.nameMaxLength,
-        localization.nameCanBeMaxLength(formConstraints.nameMaxLength)
-    ).required(localization.enterName),
+        () => localization.nameCanBeMaxLength(formConstraints.nameMaxLength)
+    ).required(() => localization.enterName),
     [ProductFormFields.Description]: Yup.string().max(
         formConstraints.descriptionMaxLength,
-        localization.descriptionCanBeMaxLength(formConstraints.descriptionMaxLength)
-    ).required(localization.enterDescription),
+        () => localization.descriptionCanBeMaxLength(formConstraints.descriptionMaxLength)
+    ).required(() => localization.enterDescription),
     [ProductFormFields.Weight]: Yup.string().max(
         formConstraints.weightMaxLength,
-        localization.weightCanBeMaxLength(formConstraints.weightMaxLength)
+        () => localization.weightCanBeMaxLength(formConstraints.weightMaxLength)
     ).required(localization.enterWeight),
     [ProductFormFields.Price]: Yup.number()
-        .moreThan(formConstraints.price.min, localization.priceShouldBeMoreThan(formConstraints.price.min))
-        .lessThan(formConstraints.price.max, localization.priceShouldBeLessThan(formConstraints.price.max))
-        .required(localization.enterPrice),
+        .moreThan(formConstraints.price.min, () => localization.priceShouldBeMoreThan(formConstraints.price.min))
+        .lessThan(formConstraints.price.max, () => localization.priceShouldBeLessThan(formConstraints.price.max))
+        .required(() => localization.enterPrice),
     [ProductFormFields.Spiciness]: Yup.mixed<SpicinessType>().oneOf(Object.values(SpicinessType)),
     [ProductFormFields.Ingredients]: Yup.string().max(
         formConstraints.ingredientsMaxLength,
-        localization.ingredientsCanBeMaxLength(formConstraints.ingredientsMaxLength)
-    ).required(localization.enterPassword),
-    [ProductFormFields.Image]: Yup.string().required(localization.pickImage),
+        () => localization.ingredientsCanBeMaxLength(formConstraints.ingredientsMaxLength)
+    ).required(() => localization.enterPassword),
+    [ProductFormFields.Image]: Yup.string().required(() => localization.pickImage),
 });
 
 const spicinessOptions: RadioOption[] = getEnumMembers(SpicinessType).map(t => ({

@@ -18,6 +18,7 @@ export function useProducts(type?: ProductType | null): Result {
         () => ProductsService.getProducts(type),
         {
             keepPreviousData: true,
+            retry: 3,
         });
 
     return {
