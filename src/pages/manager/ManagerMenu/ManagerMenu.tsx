@@ -29,7 +29,7 @@ export function ManagerMenu() {
     const [isEditProductFormModalOpen, setIsEditProductFormModalOpen] = useState<boolean>(false);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false);
 
-    const { products, isLoading } = useProducts(selectedType);
+    const { products, isLoading, refetch } = useProducts(selectedType);
     const isProductsLoading = useDelayedFlag(300, [isLoading]);
 
     const { onDeleteProduct } = useDeleteProduct(() => setIsDeleteDialogOpen(false));
@@ -103,21 +103,30 @@ export function ManagerMenu() {
                 isModalOpen={isCreateProductFormModalOpen}
                 productType={selectedType!}
                 onClose={() => setIsCreateProductFormModalOpen(false)}
-                onSuccessfulCreate={() => setIsCreateProductFormModalOpen(false)}
+                onSuccessfulCreate={() => {
+                    setIsCreateProductFormModalOpen(false);
+                    refetch();
+                }}
             />
             <EditProductForm
                 product={manageProduct}
                 isModalOpen={isEditProductFormModalOpen}
                 productType={selectedType!}
                 onClose={() => setIsEditProductFormModalOpen(false)}
-                onSuccessfulEdit={() => setIsEditProductFormModalOpen(false)}
+                onSuccessfulEdit={() => {
+                    setIsEditProductFormModalOpen(false);
+                    refetch();
+                }}
             />
             <ConfirmationDialog
                 title={localization.areYouSureYouWantToDeleteProduct}
                 isDialogOpen={isDeleteDialogOpen}
                 onClose={() => setIsDeleteDialogOpen(false)}
                 onNo={() => setIsDeleteDialogOpen(false)}
-                onYes={() => onDeleteProduct(manageProduct?.id ?? '')}
+                onYes={() => {
+                    onDeleteProduct(manageProduct?.id ?? '')
+                    refetch();
+                }}
             />
         </>
     );

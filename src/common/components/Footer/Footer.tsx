@@ -9,6 +9,7 @@ import { NavigationLink } from '../NavigationLink';
 import { MenuList } from './components/MenuList';
 
 import styles from './Footer.module.scss';
+import { localization } from 'resources';
 
 export function Footer() {
     const productTypes = getAllProductTypes();
@@ -21,7 +22,7 @@ export function Footer() {
                     <Logo />
                     {renderMenu && (
                         <MenuList
-                            title={'Меню'}
+                            title={localization.menu}
                             className={styles["menu"]}
                         >
                             <div className={styles['menu-items']}>

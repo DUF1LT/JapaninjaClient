@@ -47,6 +47,14 @@ export const enUs = {
     thereAreNoCouriers: 'There are no couriers',
     phone: 'Phone',
     fire: 'Fire',
+    menu: 'Menu',
+    addToCart: 'Add to cart',
+    yourCartIsEmpty: 'Your cart is empty',
+    goToMenu: 'Go to menu',
+    checkout: 'Checkout',
+    clearCart: 'Clear cart',
+    orderSum: 'Order price',
+    pieces: 'piece(s)',
 
     //validations
     enterName: 'Enter name',

@@ -47,6 +47,14 @@ export const ruRu = {
     thereAreNoCouriers: 'Курьеры не найдены',
     phone: 'Телефон',
     fire: 'Уволить',
+    menu: 'Меню',
+    addToCart: 'В корзину',
+    yourCartIsEmpty: 'Ваша корзина пуста',
+    goToMenu: 'Перейти в меню',
+    checkout: 'Оформить заказ',
+    clearCart: 'Очистить корзину',
+    orderSum: 'Сумма заказа',
+    pieces: 'шт.',
 
     //validations
     enterName: 'Введите имя',

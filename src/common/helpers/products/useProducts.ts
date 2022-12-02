@@ -10,10 +10,11 @@ type Result = {
     products: Product[],
     isLoading: boolean,
     error: string | null,
+    refetch: () => void;
 };
 
 export function useProducts(type?: ProductType | null): Result {
-    const { data, isLoading, error } = useQuery<Product[], Error>(
+    const { data, isLoading, error, refetch } = useQuery<Product[], Error>(
         productsQueries.type(type),
         () => ProductsService.getProducts(type),
         {
@@ -25,5 +26,6 @@ export function useProducts(type?: ProductType | null): Result {
         products: data ?? [],
         isLoading,
         error: error?.error ?? null,
+        refetch,
     };
 }

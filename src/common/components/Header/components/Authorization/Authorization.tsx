@@ -1,16 +1,20 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Button } from "common/components/Button";
+import { NavigationLink } from "common/components/NavigationLink";
+
 import { login, logout } from "store/authSlice";
-import { AuthData, Role } from "models/response/AuthData";
+import { clearCart } from "store/cartSlice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
+
+import { AuthData, Role } from "models/response/AuthData";
 import { links, localization } from "resources";
 
 import { AuthorizationForm } from "./AuthorizationForm";
 
 import styles from './Authorization.module.scss';
-import { useNavigate } from "react-router-dom";
-import { NavigationLink } from "common/components/NavigationLink";
+
 
 const authDataRoleToString: Record<Role, () => string> = {
     [Role.Manager]: () => localization.manager,
@@ -48,6 +52,7 @@ export function Authorization() {
 
     const onLogoutClick = () => {
         dispatch(logout());
+        dispatch(clearCart());
         navigate(links.root);
     };
 

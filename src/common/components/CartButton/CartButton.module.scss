@@ -1,0 +1,41 @@
+@import "src/assets/dimensions.scss";
+@import "src/assets/palette.scss";
+
+.cart-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+    
+    width: 135px;
+    height: 24px;
+
+    padding: 8px 0px;
+    
+    border: 2px solid $red-color;
+    border-radius: 13px;
+}
+
+.control {
+  line-height: 28%;
+
+  border: none;
+  background: transparent;
+  color: $white-color;
+
+  cursor: pointer;
+  transform: 0.2s;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.amount {
+    width: 20px;
+    
+    text-align: center;
+    
+    color: $white-color;
+}

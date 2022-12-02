@@ -17,3 +17,17 @@
         grid-gap: 30px;
     }
 }
+
+.product-item-cart {
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media (max-width: 680px) {
+    .menu-content {
+        display: grid;
+        justify-items: center;
+        grid-template-columns: 1fr;
+        grid-gap: 30px;
+    }
+}

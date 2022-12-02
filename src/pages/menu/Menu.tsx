@@ -1,12 +1,21 @@
 import { Container } from "@mui/system";
+import { CartButton } from "common/components/CartButton";
 import { ProductItem } from "common/components/ProductItem";
 import { useProducts } from "common/helpers/products/useProducts";
 import { useSelectedMenuType } from "common/hooks/useSelectedMenuType";
 import { getStringByProductType } from "models/domain/helpers/getStringByProductType";
+import { Product } from "models/domain/Product";
 import { localization } from "resources";
 
 import styles from './Menu.module.scss';
 
+const renderProductItemAction = (product: Product) => {
+    return (
+        <div className={styles['product-item-cart']}>
+            <CartButton product={product} />
+        </div>
+    );
+};
 
 export function Menu() {
     const selectedType = useSelectedMenuType();
@@ -32,7 +41,11 @@ export function Menu() {
         return (
             <div className={styles['menu-content']}>
                 {products.map(p => (
-                    <ProductItem product={p} />
+                    <ProductItem
+                        key={p.id}
+                        product={p}
+                        actions={renderProductItemAction(p)}
+                    />
                 ))}
             </div>
         );

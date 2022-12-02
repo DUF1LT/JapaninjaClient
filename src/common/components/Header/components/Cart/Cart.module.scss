@@ -1,0 +1,19 @@
+@import "src/assets/palette.scss";
+@import "src/assets/dimensions.scss";
+
+.cart {
+    min-height: 30px;
+    gap: 10px;
+
+    &-price {
+        width: auto;
+        
+    }
+}
+
+
+hr.cart-divider {
+    height: 15px;
+    color: $white-color;
+    background-color: $white-color;
+}

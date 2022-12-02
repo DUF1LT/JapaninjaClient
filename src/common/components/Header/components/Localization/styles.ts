@@ -13,6 +13,7 @@ export const localizationStyles: SxProps = {
         fontFamily: 'inherit',
         border: `1px solid ${Colors.Red}`,
         borderRadius: '13px',
+        transition: 'all 0.3s ease',
     },
     "& button:hover": {
         backgroundColor: Colors.Red,
