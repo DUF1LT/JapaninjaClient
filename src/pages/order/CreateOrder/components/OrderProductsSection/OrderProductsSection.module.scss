@@ -1,0 +1,21 @@
+@import "src/assets/dimensions.scss";
+@import "src/assets/palette.scss";
+
+.order-products-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    border: 2px solid $white-color;
+    border-radius: 13px;
+    padding: 30px 45px;
+
+    &-stub {
+        border: 2px solid $white-color;
+        border-radius: 13px;
+        padding: 30px 45px;
+        text-align: center;
+    }
+}

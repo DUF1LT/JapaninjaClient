@@ -17,7 +17,6 @@ export function useCouriers(): Result {
         couriersQueries.couriers,
         () => CouriersService.getCouriers(),
         {
-            keepPreviousData: true,
             retry: 3,
         });
 

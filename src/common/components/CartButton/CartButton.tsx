@@ -22,7 +22,7 @@ export function CartButton({
     const cart = useAppSelector(s => s.cart.cart);
     const dispatch = useAppDispatch();
 
-    const productInCart = useMemo(() => cart.find(c => c.product.id === product.id), [product, cart])
+    const productInCart = useMemo(() => cart.products.find(c => c.product.id === product.id), [product, cart])
 
     if (productInCart) {
         return (

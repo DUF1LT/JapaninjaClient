@@ -27,7 +27,10 @@ const theme = createTheme({
     },
     secondary: {
       main: Colors.Red,
-    }
+      dark: Colors.Black,
+      light: Colors.LightBlack,
+    },
+    mode: 'dark',
   },
 });
 

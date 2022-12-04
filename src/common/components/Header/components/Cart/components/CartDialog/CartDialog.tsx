@@ -1,42 +1,42 @@
 import { Dialog, Divider } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 
 import { dialogStyles } from "common/components/Form/styles";
 import { Button } from "common/components/Button";
-import { links, localization } from "resources";
+import { localization } from "resources";
 import { useAppDispatch } from "store/hooks";
+import { useCart } from "common/helpers/cart/useCart";
+import { clearCart } from "store/cartSlice";
+
 import { CartItem } from "../CartItem";
 
 import styles from './CartDialog.module.scss';
-import { useCart } from "common/helpers/cart/useCart";
-import { clearCart } from "store/cartSlice";
+
 
 
 interface Props {
     isOpen: boolean;
     onClose: () => void;
+    onCreateOrderClick: () => void;
+    onMoveToMenuClick: () => void;
 }
 
 export function CartDialog({
     isOpen,
     onClose,
+    onCreateOrderClick,
+    onMoveToMenuClick,
 }: Props) {
-    const navigate = useNavigate();
-
     const { cart, cartSum } = useCart();
     const dispatch = useAppDispatch();
 
     const renderCartModalContent = () => {
-        if (cart.length === 0) {
+        if (cart.products.length === 0) {
             return (
                 <div className={styles['cart-stub']}>
                     <span className={styles['cart-stub-title']}>{localization.yourCartIsEmpty}</span>
                     <Button
                         filled
-                        onClick={() => {
-                            onClose()
-                            navigate(links.menu.root);
-                        }}
+                        onClick={onMoveToMenuClick}
                     >
                         {localization.goToMenu}
                     </Button>
@@ -47,7 +47,7 @@ export function CartDialog({
         return (
             <div className={styles['cart-modal-content']}>
                 <div className={styles['cart-items']}>
-                    {cart.map(c => (
+                    {cart.products.map(c => (
                         <CartItem
                             key={c.product.id}
                             cartProduct={c}
@@ -61,7 +61,7 @@ export function CartDialog({
                             {localization.orderSum}
                         </span>
                         <span className={styles['cart-modal-price-sum']}>
-                            {cartSum} р.
+                            {cartSum} {localization.rubles}
                         </span>
                     </div>
                     <div className={styles['cart-options']}>
@@ -73,6 +73,7 @@ export function CartDialog({
                         </span>
                         <Button
                             filled
+                            onClick={onCreateOrderClick}
                         >
                             {localization.checkout}
                         </Button>

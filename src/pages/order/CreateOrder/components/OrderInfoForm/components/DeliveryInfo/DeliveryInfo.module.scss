@@ -1,0 +1,25 @@
+@import "src/assets/dimensions.scss";
+@import "src/assets/palette.scss";
+
+.delivery-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &-options {
+        display: flex;
+        gap: 15px;
+    }
+
+    &-option {
+        width: -webkit-fill-available;
+    }
+}
+
+.delivery-pickup {
+    display: flex;
+    gap: 10px;
+    font-size: $font-medium;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,0 +1,9 @@
+@import "src/assets/dimensions.scss";
+@import "src/assets/palette.scss";
+
+.error-message {
+    margin-top: -20px;
+    height: 20px;
+    font-size: $font-extra-small;
+    color: $red-color;
+}

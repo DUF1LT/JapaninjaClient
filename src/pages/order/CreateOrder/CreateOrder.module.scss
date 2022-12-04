@@ -1,0 +1,57 @@
+@import "src/assets/dimensions.scss";
+@import "src/assets/palette.scss";
+
+.create-order-page {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+
+    padding: 30px 0;
+
+    min-height: 950px;
+}
+
+.order-content {
+    flex: 0.9;
+
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+
+    &-section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+.order-content-title {
+    font-size: $font-medium;
+    font-weight: 600;
+}
+
+.order-cutlery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 25px;
+}
+
+@media (max-width: 1700px) {
+    .create-order-page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        min-height: 950px;
+    }
+
+    .order-content {
+        width: 80%;
+    }
+
+    .order-cutlery {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 25px;
+    }
+}

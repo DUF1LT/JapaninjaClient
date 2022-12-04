@@ -11,5 +11,8 @@ export const links = {
     menu: {
         root: 'menu',
         menuWithProductType: (type: ProductType) => `menu?productType=${type}`,
+    },
+    order: {
+        createOrder: 'createOrder'
     }
 }

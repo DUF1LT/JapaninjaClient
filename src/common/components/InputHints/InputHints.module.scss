@@ -1,0 +1,16 @@
+$paper-height: 300px;
+
+.popper {
+    z-index: 10;
+}
+
+.input-hint-paper {
+    overflow-y: auto;
+
+    max-height: $paper-height;
+
+    padding: 5px 0;
+
+    background-color: black;
+    color: white;
+}

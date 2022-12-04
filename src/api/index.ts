@@ -29,6 +29,10 @@ const endpoints = {
         root: `/products`,
         withId: (id: string) => `/products/${id}`,
         ofType: (type: ProductType) => `/products?type=${type}`,
+    },
+    orders: {
+        root: '/orders',
+        orderConfiguration: (customerId?: string) => `/orders/configuration/${!!customerId ? customerId : 'null'}`,
     }
 };
 

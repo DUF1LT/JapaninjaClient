@@ -30,6 +30,7 @@ export function Localization() {
         >
             {localizations.map(l => (
                 <ToggleButton
+                    key={l}
                     className={styles['localization-button']}
                     value={l}
                 >

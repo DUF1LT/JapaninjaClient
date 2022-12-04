@@ -1,0 +1,14 @@
+.delivery-time-info {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    &-options {
+        display: flex;
+        gap: 15px;
+    }
+
+    &-option {
+        width: -webkit-fill-available;
+    }
+}

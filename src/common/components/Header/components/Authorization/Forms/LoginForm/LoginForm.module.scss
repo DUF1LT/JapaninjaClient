@@ -10,7 +10,7 @@
         width: $modal-windown-width;
         height: auto;
         
-        background-color: $black-color;
+        background-color: $black-color !important;
     }
 
     &-content {

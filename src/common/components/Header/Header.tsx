@@ -43,6 +43,7 @@ export function Header() {
                     <div className={styles['header-menu']}>
                         {productTypes.map(t => (
                             <NavigationLink
+                                key={t}
                                 label={getStringByProductType(t)}
                                 link={menuLinksBuilder!(t)}
                                 type={t === selectedMenuType ? NavigationLinkType.Hightlighted : NavigationLinkType.Default}

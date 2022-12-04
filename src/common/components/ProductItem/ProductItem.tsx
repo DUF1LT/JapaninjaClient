@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Product } from 'models/domain/Product';
+import { localization } from 'resources';
 
 import { ItemCard } from '../ItemCard';
 
@@ -23,7 +24,7 @@ export function ProductItem({
                     {product.name}
                 </span>
                 <span>
-                    {product.price} р.
+                    {product.price} {localization.rubles}
                 </span>
             </div>
             <div className={styles['product-item-description']}>

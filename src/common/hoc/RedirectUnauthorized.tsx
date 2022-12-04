@@ -7,22 +7,28 @@ import { useAppSelector } from "store/hooks";
 import { hasAuthData } from "common/helpers/auth/authHelpers";
 
 interface Props {
-    checkIfAuthorized: (authData: AuthData) => boolean;
+    checkIfAuthorized: ((authData: AuthData) => boolean);
     children: JSX.Element;
     redirectPath?: string;
+    checkOnlyAuthorizationRule?: boolean;
 }
 
 export function RedirectUnauthorized({
     checkIfAuthorized,
     children,
-    redirectPath = links.root
+    redirectPath = links.root,
+    checkOnlyAuthorizationRule = false,
 }: Props) {
-    const { authData, isLoggedIn: isLogedIn } = useAppSelector(state => state.auth);
+    const { authData, isLoggedIn } = useAppSelector(state => state.auth);
     const navigate = useNavigate();
 
     const redirectUnauthorized = () => {
+        if (checkOnlyAuthorizationRule && checkIfAuthorized(authData as AuthData)) {
+            return;
+        }
+
         if (!hasAuthData(authData)
-            || !isLogedIn
+            || !isLoggedIn
             || !checkIfAuthorized(authData)
         ) {
             return navigate(redirectPath);

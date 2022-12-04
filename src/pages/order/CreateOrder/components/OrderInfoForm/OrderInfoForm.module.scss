@@ -1,0 +1,46 @@
+@import "src/assets/dimensions.scss";
+@import "src/assets/palette.scss";
+
+.order-info {
+    &-form {
+        display: flex;
+        flex-direction: column;
+        gap: 70px;
+    }
+
+    &-section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    &-title {
+        font-size: $font-medium;
+        font-weight: 600;
+    }
+
+    &-your-data {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+
+        &-input {
+            width: -webkit-fill-available;
+        }
+    }
+
+    &-error {
+        display: inline-block;
+        margin: 10px auto;
+        height: 15px;
+        font-size: $font-extra-small;
+        color: $red-color;
+        width: auto;
+    }
+}
+
+.create-order-submit {
+    width: 150px;
+    margin-top: -30px;
+    margin-bottom: 30px;
+}

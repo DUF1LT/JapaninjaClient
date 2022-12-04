@@ -12,6 +12,16 @@ export function canDeliver(authData: AuthData) {
     return role === Role.Courier;
 }
 
+export function canCreateOrder(authData: AuthData | Partial<AuthData>) {
+    if (!hasAuthData(authData)) {
+        return true;
+    }
+
+    const role = authData.role;
+
+    return role === Role.Customer;
+}
+
 export function hasAuthData(authData: AuthData | Partial<AuthData>): authData is AuthData {
     if (!authData) {
         return false;
