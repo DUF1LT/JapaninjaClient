@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { OrderStatus } from 'models/domain/OrderStatus';
 import { ProductType } from 'models/domain/ProductType';
 
 const API_URL = 'https://localhost:2472/api';
@@ -33,6 +34,11 @@ const endpoints = {
     orders: {
         root: '/orders',
         orderConfiguration: (customerId?: string) => `/orders/configuration/${!!customerId ? customerId : 'null'}`,
+        order: (orderId?: string) => `/orders/${orderId}`,
+        orders: (orderStatus: OrderStatus) => `/orders?orderStatus=${orderStatus}`,
+        process: (orderId: string) => `/orders/${orderId}/process`,
+        setToReady: (orderId: string) => `/orders/${orderId}/setToReady`,
+        cancel: (orderId: string) => `/orders/${orderId}/cancel`,
     }
 };
 

@@ -1,7 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { links } from "resources";
 
 import { CreateOrderPayload, OrdersService } from "services/OrdersService";
 import { Error } from "services/types";
+import { useAppSelector } from "store/hooks";
 
 import { ordersQueries } from "./ordersQueries";
 
@@ -12,11 +15,17 @@ type Result = {
 };
 
 export function useCreateOrder(onSuccess?: () => void): Result {
-    const { mutate, isLoading, error } = useMutation<void, Error, CreateOrderPayload>(
-        ordersQueries.createQuery('a'),
+    const navigate = useNavigate();
+    const auth = useAppSelector(s => s.auth.authData);
+    const customerId = auth?.id;
+
+    const { mutate, isLoading, error } = useMutation<string, Error, CreateOrderPayload>(
+        ordersQueries.createOrder(customerId),
         (payload: CreateOrderPayload) => OrdersService.createOrder(payload),
         {
-            onSuccess: onSuccess,
+            onSuccess: (data) => {
+                navigate(links.order.orderConfirmationWithId(data));
+            }
         },
     );
 

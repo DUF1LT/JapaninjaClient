@@ -10,6 +10,7 @@ const errorTypeToError: Record<ErrorType, () => Error> = {
     [ErrorType.UserDoesNotExist]: () => createError(localization.userDoesNotExist),
     [ErrorType.UserWithTheSameEmailAlreadyExist]: () => createError(localization.userAlreadyExists),
     [ErrorType.PasswordIsInvalid]: () => createError(localization.wrongPassword),
+    [ErrorType.OrderShouldBeInProcessingStatus]: () => createError(localization.orderShouldBeInProcessing),
 }
 
 export const getErrorByErrorType = (errorType: ErrorType): Error => errorTypeToError[errorType]() ?? createError(localization.somethingWentWrong);

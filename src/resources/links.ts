@@ -13,6 +13,10 @@ export const links = {
         menuWithProductType: (type: ProductType) => `menu?productType=${type}`,
     },
     order: {
-        createOrder: 'createOrder'
+        root: 'order',
+        createOrder: 'createOrder',
+        orderConfirmation: 'orderConfirmation',
+        orderConfirmationWithId: (orderId: string) => `orderConfirmation/${orderId}`,
+        order: (orderId: string) => `order/${orderId}`,
     }
 }

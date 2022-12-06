@@ -17,9 +17,9 @@ const managerPanelTabToLabel: Record<ManagerPanelTab, () => string> = {
     [ManagerPanelTab.Orders]: () => localization.orders,
 };
 
-const managerPanelTabToTabElement: Record<ManagerPanelTab, React.ReactNode> = {
-    [ManagerPanelTab.Couriers]: <CouriersPanel />,
-    [ManagerPanelTab.Orders]: <OrdersPanel />,
+const managerPanelTabToTabElement: Record<ManagerPanelTab, () => React.ReactNode> = {
+    [ManagerPanelTab.Couriers]: () => <CouriersPanel />,
+    [ManagerPanelTab.Orders]: () => <OrdersPanel />,
 };
 
 const managerPanelTabs = getEnumMembers(ManagerPanelTab).filter(Number.isFinite) as ManagerPanelTab[];
@@ -50,7 +50,7 @@ export function ManagerPanel() {
                 </Tabs>
             </Box>
             <div className={styles['manager-panel-body']}>
-                {managerPanelTabToTabElement[tab]}
+                {managerPanelTabToTabElement[tab]()}
             </div>
         </Container>
     );

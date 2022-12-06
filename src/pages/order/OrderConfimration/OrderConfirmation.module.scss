@@ -1,0 +1,52 @@
+@import "src/assets/dimensions.scss";
+@import "src/assets/palette.scss";
+
+.order-confirmation {
+    &-page {
+        display: flex;
+        flex-direction: column;
+    
+        gap: 40px;
+    
+        padding: 60px 0;
+    }
+
+    &-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: -webkit-fill-available;
+        height: 65px;
+        border: 3px solid $white-color;
+        border-radius: 10px;
+        font-size: $font-medium;
+    }
+
+    &-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    &-info {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    &-item {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 20px;
+
+        border: 2px solid $red-color;
+        border-radius: 15px;
+    }
+
+    &-text {
+        font-weight: 600;  
+        font-size: $font-small; 
+    }
+}
