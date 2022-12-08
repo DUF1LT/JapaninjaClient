@@ -14,6 +14,12 @@ export function canDeliver(authData: AuthData) {
     return role === Role.Courier;
 }
 
+export function isCustomer(authData: AuthData) {
+    const role = authData.role;
+
+    return role === Role.Customer;
+}
+
 export function canCreateOrder(authData: AuthData | Partial<AuthData>) {
     if (!hasAuthData(authData)) {
         return true;
@@ -35,17 +41,15 @@ export function canAccessOrder(authData: AuthData, order: Order) {
         return true;
     }
 
-    if (role === Role.Courier && (order.courierId === authData.id || order.orderStatus === OrderStatus.Ready)) {
+    if (role === Role.Courier && (order.courierId === authData.id || order.status === OrderStatus.Ready)) {
         return true;
     }
 
     return false;
 }
 
-export function canAccessOrderConfirmation(authData: AuthData, order: Order) {
-    const role = authData.role;
-
-    if (role === Role.Customer && order.customerId === authData.id && order.orderStatus === OrderStatus.Processing) {
+export function canAccessOrderConfirmation(order: Order) {
+    if (order.status === OrderStatus.Processing) {
         return true;
     }
 

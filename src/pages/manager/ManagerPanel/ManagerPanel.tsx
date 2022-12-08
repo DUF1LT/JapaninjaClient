@@ -5,12 +5,14 @@ import { localization } from "resources";
 
 import { Tab } from "common/components/Tab";
 import { getEnumMembers } from "common/helpers/getEnumMembers";
+import { tabsStyles } from "common/components/Tabs/styles";
+
 import { ManagerPanelTab } from "./ManagerPanelTab";
 import { CouriersPanel } from "./components/CouriersPanel";
 import { OrdersPanel } from "./components/OrdersPanel";
 
-import { managerTabsStyles } from './styles';
 import styles from './ManagerPanel.module.scss';
+
 
 const managerPanelTabToLabel: Record<ManagerPanelTab, () => string> = {
     [ManagerPanelTab.Couriers]: () => localization.couriers,
@@ -31,7 +33,7 @@ export function ManagerPanel() {
         <Container>
             <Box className={styles.tabs}>
                 <Tabs
-                    sx={managerTabsStyles}
+                    sx={tabsStyles}
                     value={tab}
                     centered
                     TabIndicatorProps={{

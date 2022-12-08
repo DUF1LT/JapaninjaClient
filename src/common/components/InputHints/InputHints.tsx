@@ -33,7 +33,7 @@ export function InputHints({
 
     useEffect(() => {
         const inputElement = inputRef?.current;
-        const handleFocus = () => { setInputFocused(true); console.log('focus'); }
+        const handleFocus = () => setInputFocused(true);
         const handleBlur = () => setInputFocused(false);
 
         inputElement?.addEventListener(Event.Focus, handleFocus);

@@ -26,8 +26,8 @@ export function OrderProductsSection({
                 <CartItem
                     key={p.product.id}
                     cartProduct={p}
-                    showImage={false}
                     minified
+                    disableActions
                 />
             ))}
         </div>

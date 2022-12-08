@@ -94,6 +94,13 @@ export const ruRu = {
     deliver: 'Доставить',
     close: 'Закрыть',
     orderShouldBeInProcessing: 'Заказ должен быть в статусе "Обрабатывается"',
+    active: 'Активные',
+    completed: 'Завершенные',
+    more: 'Подробнее',
+    order: 'Заказ',
+    comment: 'Комментарий',
+    completedTime: 'Завершено',
+    deliveredTime: 'Доставлено',
 
     //validations
     enterName: 'Введите имя',

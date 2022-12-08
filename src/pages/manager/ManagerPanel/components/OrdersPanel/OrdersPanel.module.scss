@@ -1,10 +1,13 @@
+@import "src/assets/dimensions.scss";
+@import "src/assets/palette.scss";
+
 .orders-panel {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     width: 100%;
     padding-bottom: 50px;
-    gap: 65px;
+    gap: 40px;
 
     &-stub {
         display: flex;
@@ -18,13 +21,13 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 15px;
+        gap: 20px;
 
         flex: 1;
     }
 
     &-tab {
-        width: 120px;
+        width: 100px;
     }
 
 
@@ -33,7 +36,7 @@
         width: 100%;
 
         grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
-        grid-gap: 1.25rem;
+        grid-gap: 20px;
 
         list-style: none;
     }

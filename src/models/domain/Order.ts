@@ -1,5 +1,7 @@
 import dayjs, { Dayjs } from "dayjs";
 import { CustomerAddress } from "./CustomerAddress";
+import { OrdersCutlery } from "./OrdersCutlery";
+import { OrdersProduct } from "./OrdersProduct";
 import { OrderStatus } from "./OrderStatus";
 import { Restaurant } from "./Restaurant";
 
@@ -16,14 +18,16 @@ export class Order {
     price: number;
     customerPhoneNumber: string;
     courierId?: string | null;
-    restraurantId: string;
-    restraurant: Restaurant;
+    restaurantId: string;
+    restaurant: Restaurant;
     customerAddressId: string;
     customerAddress: CustomerAddress;
     deliveryTime: Dayjs | null;
     deliveryFactTime: Dayjs | null;
-    orderStatus: OrderStatus;
+    status: OrderStatus;
     comment?: string | null;
+    products: OrdersProduct[];
+    cutlery: OrdersCutlery[];
 
     constructor({
         id,
@@ -33,14 +37,16 @@ export class Order {
         price,
         customerPhoneNumber,
         courierId,
-        restraurantId,
-        restraurant,
+        restaurantId,
+        restaurant,
         customerAddressId,
         customerAddress,
         deliveryTime,
         deliveryFactTime,
-        orderStatus,
+        status,
         comment,
+        cutlery,
+        products
     }: OrderDescriptor) {
         this.id = id;
         this.numberId = numberId;
@@ -49,13 +55,15 @@ export class Order {
         this.price = price;
         this.customerPhoneNumber = customerPhoneNumber;
         this.courierId = courierId;
-        this.restraurantId = restraurantId;
-        this.restraurant = restraurant;
+        this.restaurantId = restaurantId;
+        this.restaurant = restaurant;
         this.customerAddressId = customerAddressId;
         this.customerAddress = customerAddress;
         this.deliveryTime = deliveryTime ? dayjs(deliveryTime) : null;
         this.deliveryFactTime = deliveryFactTime ? dayjs(deliveryFactTime) : null;
-        this.orderStatus = orderStatus;
+        this.status = status;
         this.comment = comment;
+        this.cutlery = cutlery;
+        this.products = products;
     }
 }

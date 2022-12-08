@@ -1,5 +1,11 @@
+import { Container } from "@mui/system";
+
 export function Home() {
     return (
-        <div>Home</div>
+        <Container>
+            <div>
+
+            </div>
+        </Container>
     );
 }

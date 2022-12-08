@@ -9,6 +9,7 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     filled?: boolean;
     isLoading?: boolean;
     children: React.ReactNode;
+    tiny?: boolean;
 };
 
 export function Button({
@@ -16,6 +17,7 @@ export function Button({
     filled,
     isLoading,
     children,
+    tiny,
     ...restProps
 }: ButtonProps) {
     return (
@@ -23,6 +25,7 @@ export function Button({
             className={classNames(className, styles.button, {
                 [styles['button__filled']]: filled && !isLoading,
                 [styles['button__loading']]: isLoading,
+                [styles['button__tiny']]: tiny,
             })}
             {...restProps}
         >

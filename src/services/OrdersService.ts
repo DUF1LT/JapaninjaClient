@@ -96,6 +96,46 @@ export class OrdersService {
         }
     }
 
+    static async getCouriersOrders(courierId: string, orderStatus: OrderStatus): Promise<Order[]> {
+        try {
+            var result = await $api.get<OrderDescriptor[]>(endpoints.orders.courierOrders(courierId, orderStatus));
+
+            var orders = result.data;
+
+            return orders.map(o => new Order(o));
+        } catch (error) {
+            const axiosErorr = error as AxiosError;
+
+            if (axiosErorr.isAxiosError) {
+                const errorData = axiosErorr.response?.data as ErrorResponse;
+
+                throw getErrorByErrorType(errorData?.error);
+            }
+
+            throw createError(localization.somethingWentWrong);
+        }
+    }
+
+    static async getCustomerOrders(customerId: string, isActiveOrder: boolean): Promise<Order[]> {
+        try {
+            var result = await $api.get<OrderDescriptor[]>(endpoints.orders.customerOrders(customerId, isActiveOrder));
+
+            var orders = result.data;
+
+            return orders.map(o => new Order(o));
+        } catch (error) {
+            const axiosErorr = error as AxiosError;
+
+            if (axiosErorr.isAxiosError) {
+                const errorData = axiosErorr.response?.data as ErrorResponse;
+
+                throw getErrorByErrorType(errorData?.error);
+            }
+
+            throw createError(localization.somethingWentWrong);
+        }
+    }
+
     static async cancelOrder(orderId: string): Promise<void> {
         try {
             await $api.put<void>(endpoints.orders.cancel(orderId));
@@ -131,6 +171,38 @@ export class OrdersService {
     static async setToReadyOrder(orderId: string): Promise<void> {
         try {
             await $api.put<void>(endpoints.orders.setToReady(orderId));
+        } catch (error) {
+            const axiosErorr = error as AxiosError;
+
+            if (axiosErorr.isAxiosError) {
+                const errorData = axiosErorr.response?.data as ErrorResponse;
+
+                throw getErrorByErrorType(errorData?.error);
+            }
+
+            throw createError(localization.somethingWentWrong);
+        }
+    }
+
+    static async shipOrder(orderId: string): Promise<void> {
+        try {
+            await $api.put<void>(endpoints.orders.ship(orderId));
+        } catch (error) {
+            const axiosErorr = error as AxiosError;
+
+            if (axiosErorr.isAxiosError) {
+                const errorData = axiosErorr.response?.data as ErrorResponse;
+
+                throw getErrorByErrorType(errorData?.error);
+            }
+
+            throw createError(localization.somethingWentWrong);
+        }
+    }
+
+    static async closeOrder(orderId: string): Promise<void> {
+        try {
+            await $api.put<void>(endpoints.orders.close(orderId));
         } catch (error) {
             const axiosErorr = error as AxiosError;
 

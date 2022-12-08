@@ -1,8 +1,8 @@
 export enum OrderStatus {
-    Processing,
-    Preparing,
-    Ready,
-    Shipping,
-    Closed,
-    Canceled,
+    Processing = 'Processing',
+    Preparing = 'Preparing',
+    Ready = 'Ready',
+    Shipping = 'Shipping',
+    Closed = 'Closed',
+    Canceled = 'Canceled',
 }

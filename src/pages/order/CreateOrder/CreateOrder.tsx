@@ -15,6 +15,7 @@ import styles from './CreateOrder.module.scss';
 import { OrderInfoFormPayload } from './types';
 import { CreateOrderPayload } from 'services/OrdersService';
 import { useAppSelector } from 'store/hooks';
+import { useCallback } from 'react';
 
 
 interface Props {
@@ -28,7 +29,7 @@ export function CreateOrder({
     const authData = useAppSelector(s => s.auth.authData);
     const { onCreateOrder, error, isLoading } = useCreateOrder();
 
-    const onOrderInfoFormSubmit = (orderInfoPayload: OrderInfoFormPayload) => {
+    const onOrderInfoFormSubmit = useCallback((orderInfoPayload: OrderInfoFormPayload) => {
         const createOrderPayload: CreateOrderPayload = {
             customerId: authData.id,
             products: cart.products.map(p => ({
@@ -38,13 +39,13 @@ export function CreateOrder({
             cutlery: cart.cutlery.map(c => ({
                 cutleryId: c.cutlery.id,
                 amount: c.amount,
-            })),
+            })).filter(p => p.amount !== 0),
             ...orderInfoPayload,
             deliveryTime: orderInfoPayload.deliveryTime != null ? orderInfoPayload.deliveryTime.format() : null
         };
 
         onCreateOrder(createOrderPayload);
-    };
+    }, [authData, cart, onCreateOrder]);
 
     return (
         <CreateOrderContextProvider>

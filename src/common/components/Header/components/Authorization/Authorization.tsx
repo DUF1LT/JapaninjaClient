@@ -30,8 +30,8 @@ const authDataRoleToStartPage: Record<Role, string> = {
 
 const authDataRoleToAccountLink: Record<Role, string> = {
     [Role.Manager]: links.manager.root,
-    [Role.Customer]: links.root,
-    [Role.Courier]: links.root,
+    [Role.Customer]: links.customer.root,
+    [Role.Courier]: links.courier.root,
 }
 
 export function Authorization() {

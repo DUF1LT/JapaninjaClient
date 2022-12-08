@@ -5,23 +5,18 @@ import { useOrder } from "common/helpers/order/useOrder";
 import { RedirectUnauthorized } from "common/hoc";
 
 import { OrderConfirmation } from "./OrderConfirmation";
-import { localization } from "resources";
 
 export function OrderConfirmationContainer() {
     const { id } = useParams();
-
     const { order, isLoading } = useOrder(id!);
 
     if (isLoading) {
-        return (
-            <div>
-                {localization.loading}
-            </div>
-        )
+        return null;
     }
+
     return (
         <RedirectUnauthorized
-            checkIfAuthorized={() => true}
+            checkIfAuthorized={() => canAccessOrderConfirmation(order)}
             checkOnlyAuthorizationRule
         >
             <OrderConfirmation order={order} />

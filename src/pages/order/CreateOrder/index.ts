@@ -1,1 +1,1 @@
-export { CreateOrder } from './CreateOrder';
+export { CreateOrderContainer } from './CreateOrderContainer';

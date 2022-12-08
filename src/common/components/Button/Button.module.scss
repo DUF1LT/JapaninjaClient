@@ -36,6 +36,10 @@
         background-color: transparent !important;
     }
 
+    &__tiny {
+        padding: 5px 20px;
+    }
+
     transition: all 0.2s ease-in-out;
 }
 

@@ -7,7 +7,7 @@ import { Error } from "services/types";
 import { ordersQueries } from "./ordersQueries";
 
 type Result = {
-    onSetToReady: (orderId: string) => void;
+    onSetToReadyOrder: (orderId: string) => void;
     isLoading: boolean;
     error: string | null;
 };
@@ -16,7 +16,7 @@ export function useSetToReadyOrder(): Result {
     const client = useQueryClient();
 
     const { mutate, isLoading, error } = useMutation<void, Error, string>(
-        ordersQueries.setToReady,
+        ordersQueries.setToReadyOrder,
         (orderId: string) => OrdersService.setToReadyOrder(orderId),
         {
             onSuccess: () => {
@@ -26,7 +26,7 @@ export function useSetToReadyOrder(): Result {
     );
 
     return {
-        onSetToReady: mutate,
+        onSetToReadyOrder: mutate,
         isLoading,
         error: error?.error ?? null,
     };

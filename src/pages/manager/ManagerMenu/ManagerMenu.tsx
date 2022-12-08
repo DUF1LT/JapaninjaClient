@@ -9,16 +9,15 @@ import { useSelectedMenuType } from "common/hooks/useSelectedMenuType";
 import { getStringByProductType } from "models/domain/helpers/getStringByProductType";
 import { useProducts } from "common/helpers/products/useProducts";
 import { ProductItem } from "common/components/ProductItem";
-
-import { CreateProductForm } from './components/ProductForms/CreateProductForm';
-import { EditProductForm } from "./components/ProductForms/EditProductForm";
-
-import styles from './ManagerMenu.module.scss';
 import { Product } from "models/domain/Product";
 import { useDelayedFlag } from "common/hooks/useDelayedFlag";
 import { ConfirmationDialog } from "common/components/ConfirmationDialog";
 import { useDeleteProduct } from "common/helpers/manager/useDeleteProduct";
 
+import { CreateProductForm } from './components/ProductForms/CreateProductForm';
+import { EditProductForm } from "./components/ProductForms/EditProductForm";
+
+import styles from './ManagerMenu.module.scss';
 
 
 export function ManagerMenu() {

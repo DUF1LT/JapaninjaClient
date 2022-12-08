@@ -8,11 +8,13 @@ import styles from './OrderItem.module.scss';
 interface Props {
     order: Order;
     actions?: React.ReactElement;
+    onMoreClick?: () => void;
 }
 
 export function OrderItem({
     order,
     actions,
+    onMoreClick,
 }: Props) {
     return (
         <ItemCard className={styles['order-item']}>
@@ -33,6 +35,12 @@ export function OrderItem({
                     <span>
                         <span className={styles['order-item-bold-text']}>{localization.deliveryAddress}: </span>
                         {order.customerAddress === null ? localization.pickup : order.customerAddress.address}
+                    </span>
+                    <span
+                        className={styles['order-item-more']}
+                        onClick={onMoreClick}
+                    >
+                        {localization.more}
                     </span>
                 </div>
             </div>

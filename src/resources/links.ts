@@ -16,7 +16,13 @@ export const links = {
         root: 'order',
         createOrder: 'createOrder',
         orderConfirmation: 'orderConfirmation',
-        orderConfirmationWithId: (orderId: string) => `orderConfirmation/${orderId}`,
+        orderConfirmationWithId: (orderId: string) => `/orderConfirmation/${orderId}`,
         order: (orderId: string) => `order/${orderId}`,
+    },
+    courier: {
+        root: 'courier',
+    },
+    customer: {
+        root: 'customer',
     }
 }

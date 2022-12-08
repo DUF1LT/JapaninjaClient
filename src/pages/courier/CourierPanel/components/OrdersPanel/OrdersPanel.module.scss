@@ -1,0 +1,48 @@
+.orders-panel {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    min-height: 580px;
+    padding-bottom: 50px;
+    gap: 65px;
+
+    &-stub {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: -webkit-fill-available;
+        padding: 30px;
+    }
+
+    &-tabs {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+
+        flex: 1;
+    }
+
+    &-tab {
+        width: 120px;
+    }
+
+
+    &-body {
+        display: grid;
+        width: 100%;
+
+        grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+        grid-gap: 1.25rem;
+
+        list-style: none;
+    }
+}
+
+.order-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: space-between;
+}

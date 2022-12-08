@@ -1,17 +1,19 @@
 import { useState } from 'react';
 
+import { localization } from 'resources';
 import { Button } from 'common/components/Button';
 import { getEnumMembers } from 'common/helpers/getEnumMembers';
 import { OrderStatus } from 'models/domain/OrderStatus';
-import { localization } from 'resources';
-
 import { useOrders } from 'common/helpers/order/useOrders';
 import { LoadingStub } from 'common/components/LoadingStub';
 import { OrderItem } from 'common/components/OrderItem';
+import { Order } from 'models/domain/Order';
+import { OrderDetails } from 'common/components/OrderDetails';
 
-import { useOrdersPanel } from './useOrdersPanel';
+import { useManagerOrdersPanel } from './useManagerOrdersPanel';
 
 import styles from './OrdersPanel.module.scss';
+
 
 const orderStatusToLabel: Record<OrderStatus, () => string> = {
     [OrderStatus.Processing]: () => localization.processing,
@@ -22,22 +24,28 @@ const orderStatusToLabel: Record<OrderStatus, () => string> = {
     [OrderStatus.Canceled]: () => localization.canceled,
 };
 
-const ordersPanelTabs = getEnumMembers(OrderStatus).filter(Number.isFinite) as OrderStatus[];
+const ordersPanelTabs = getEnumMembers(OrderStatus) as OrderStatus[];
 
 export function OrdersPanel() {
     const [status, setStatus] = useState<OrderStatus>(OrderStatus.Processing);
     const { orders, isLoading } = useOrders(status);
-    const itemActionsDescriptor = useOrdersPanel(status);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [orderDetails, setOrderDetails] = useState<Order>();
 
-    const renderItemActions = (orderId: string) => {
-        const { cancel, mainAction } = itemActionsDescriptor;
+    const itemActionsDescriptor = useManagerOrdersPanel(status);
+
+    const renderItemActions = (order: Order) => {
+        const { cancel, mainAction } = typeof itemActionsDescriptor === 'function' ? itemActionsDescriptor(order) : itemActionsDescriptor;
+        const areActionsLoading = cancel?.isLoading || mainAction?.isLoading;
 
         return (
             <div className={styles['order-item-actions']}>
                 {!!cancel && (
                     <Button
-                        onClick={() => cancel.onClick(orderId)}
+                        onClick={() => cancel!.onClick(order.id)}
                         isLoading={cancel.isLoading}
+                        disabled={areActionsLoading}
+                        tiny
                     >
                         {cancel.label()}
                     </Button>
@@ -45,8 +53,11 @@ export function OrdersPanel() {
                 {!!mainAction && (
                     <Button
                         filled
-                        onClick={() => mainAction.onClick(orderId)}
+                        onClick={() => mainAction!.onClick(order.id)}
                         isLoading={mainAction.isLoading}
+                        disabled={areActionsLoading}
+                        tiny
+
                     >
                         {mainAction.label()}
                     </Button>
@@ -69,7 +80,11 @@ export function OrdersPanel() {
                 {orders.map(o => (
                     <OrderItem
                         order={o}
-                        actions={renderItemActions(o.id)}
+                        actions={renderItemActions(o)}
+                        onMoreClick={() => {
+                            setIsModalOpen(true);
+                            setOrderDetails(o);
+                        }}
                     />
                 ))}
             </div>
@@ -98,6 +113,11 @@ export function OrdersPanel() {
                 : (
                     renderOrders()
                 )}
+            <OrderDetails
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                order={orderDetails!}
+            />
         </div>
     );
 }

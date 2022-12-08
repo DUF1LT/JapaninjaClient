@@ -94,6 +94,13 @@ export const enUs = {
     deliver: 'Deliver',
     close: 'Close',
     orderShouldBeInProcessing: 'Order should be in "Processing" status',
+    active: 'Active',
+    completed: 'Completed',
+    more: 'More',
+    order: 'Order',
+    comment: 'Comment',
+    completedTime: 'Completed at',
+    deliveredTime: 'Delivered at',
 
     //validations
     enterName: 'Enter name',

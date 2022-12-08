@@ -20,7 +20,7 @@ export function DeliveryInfo({
     orderConfiguration
 }: Props) {
     const inputRef = useRef(null);
-    const { values } = useFormikContext<OrderInfoFormPayload>();
+    const { values, setFieldValue } = useFormikContext<OrderInfoFormPayload>();
     const { createOrderInfo, setCreateOrderInfo } = useCreateOrderContext();
 
     const addressValue = values[OrderInfoFormFields.Address];
@@ -35,13 +35,21 @@ export function DeliveryInfo({
                         name={OrderInfoFormFields.Address}
                         placeholder={localization.address}
                         type='text'
+                        autoComplete={addresses.length === 0 ? 'on' : 'off'}
                     />
                     <InputHints
                         forceClose={addressValue !== '' || addresses.length === 0}
                         inputRef={inputRef}
                     >
                         {addresses.map(a => (
-                            <span>{a.address}</span>
+                            <div
+                                className={styles['delivery-info-address']}
+                                onMouseDown={() => {
+                                    setFieldValue(OrderInfoFormFields.Address, a.address)
+                                }}
+                            >
+                                {a.address}
+                            </div>
                         ))}
                     </InputHints>
                 </div>

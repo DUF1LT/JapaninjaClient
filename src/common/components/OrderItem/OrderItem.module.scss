@@ -14,6 +14,8 @@
         flex-direction: column;
         align-items: center;
         gap: 25px;
+
+        width: 100%;
     }
 
     &-header {
@@ -43,5 +45,18 @@
 
     &-text {
         gap: 5px;
+    }
+
+    &-more {
+        color: $red-color;
+        cursor: pointer;
+        font-size: $font-small;
+        font-weight: 600;
+        transition: 0.2s all ease-in;
+        margin-top: 10px;
+
+        &:hover {
+            color: lighten($red-color, 10)
+        }
     }
 }

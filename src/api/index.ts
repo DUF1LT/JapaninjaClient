@@ -36,8 +36,12 @@ const endpoints = {
         orderConfiguration: (customerId?: string) => `/orders/configuration/${!!customerId ? customerId : 'null'}`,
         order: (orderId?: string) => `/orders/${orderId}`,
         orders: (orderStatus: OrderStatus) => `/orders?orderStatus=${orderStatus}`,
+        courierOrders: (courierId: string, orderStatus: OrderStatus) => `/orders/courier/${courierId}?orderStatus=${orderStatus}`,
+        customerOrders: (customerId: string, isActiveOrders: boolean) => `/orders/customer/${customerId}?isActiveOrders=${isActiveOrders}`,
         process: (orderId: string) => `/orders/${orderId}/process`,
         setToReady: (orderId: string) => `/orders/${orderId}/setToReady`,
+        ship: (orderId: string) => `/orders/${orderId}/ship`,
+        close: (orderId: string) => `/orders/${orderId}/close`,
         cancel: (orderId: string) => `/orders/${orderId}/cancel`,
     }
 };

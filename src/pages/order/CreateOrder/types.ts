@@ -15,19 +15,19 @@ export enum OrderInfoFormFields {
     AdditionalInfo = 'additionalInfo',
 }
 
-export type OrderProduct = {
+export type CartOrderProduct = {
     productId: string;
     amount: number;
 }
 
-export type CutleryProduct = {
+export type CartCutleryProduct = {
     cutleryId: string;
     amount: number;
 }
 
 export type CreateOrderFormPayload = {
-    [CreateOrderFormFields.Products]: OrderProduct[];
-    [CreateOrderFormFields.Cutlery]: CutleryProduct[];
+    [CreateOrderFormFields.Products]: CartOrderProduct[];
+    [CreateOrderFormFields.Cutlery]: CartCutleryProduct[];
     [OrderInfoFormFields.Restaurant]: Restaurant;
     [OrderInfoFormFields.Address]: string | null;
     [OrderInfoFormFields.DeliveryTime]: Dayjs | null;

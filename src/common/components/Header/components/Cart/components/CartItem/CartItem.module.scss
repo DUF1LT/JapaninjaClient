@@ -11,12 +11,12 @@
 
     height: 110px;
     width: -webkit-fill-available;
-    padding: 20px 50px;
+    padding: 20px 25px;
 
     &-image {
         width: 105px;
         height: 70px;
-        object-fit: contain;
+        object-fit: cover;
     }
 
     &-info {

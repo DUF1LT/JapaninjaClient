@@ -13,7 +13,7 @@ export function OrderConfirmation({
     order,
 }: Props) {
     const renderDeliveryInfo = () => {
-        if (!order.deliveryTime) {
+        if (!order?.deliveryTime) {
             return (
                 <>
                     <span className={styles['order-confirmation-title-text']}>
@@ -39,14 +39,14 @@ export function OrderConfirmation({
     }
 
     const renderAddress = () => {
-        if (!order.customerAddressId) {
+        if (!order?.customerAddressId) {
             return (
                 <>
                     <span className={styles['order-confirmation-title-text']}>
                         {localization.pickupAddress}
                     </span>
                     <span className={styles['order-confirmation-text']}>
-                        {order.restraurant.address}
+                        {order.restaurant.address}
                     </span>
                 </>
             )
@@ -78,7 +78,7 @@ export function OrderConfirmation({
                                 {localization.yourOrderNumber}
                             </span>
                             <span className={styles['order-confirmation-text']}>
-                                {order.numberId}
+                                {order?.numberId}
                             </span>
                         </div>
                         <div className={styles['order-confirmation-item']}>

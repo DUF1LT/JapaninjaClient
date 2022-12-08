@@ -1,6 +1,7 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Form, Formik } from "formik";
 import * as Yup from 'yup';
+import dayjs from "dayjs";
 
 import { OrderConfiguration } from "models/domain/OrderConfiguration";
 import { localization } from "resources";
@@ -13,9 +14,6 @@ import { DeliveryInfo } from "./components/DeliveryInfo";
 import styles from './OrderInfoForm.module.scss';
 import { Button } from "common/components/Button";
 import { useCreateOrderContext } from "../../context/CreateOrderContext";
-import dayjs from "dayjs";
-
-
 
 interface Props {
     orderConfiguration: OrderConfiguration;
@@ -24,13 +22,14 @@ interface Props {
     error?: string | null;
 }
 
-export const OrderInfoForm = React.memo(({
+export const OrderInfoForm = ({
     onSubmit,
     orderConfiguration,
     isLoading,
     error
 }: Props) => {
     const { createOrderInfo } = useCreateOrderContext();
+    const [shouldSubmit, setShouldSubmit] = useState(false);
 
     const formInitialValues = useMemo(() => {
         const initialValues: OrderInfoFormPayload = {
@@ -69,7 +68,35 @@ export const OrderInfoForm = React.memo(({
         return Yup.object(schema);
     }, [createOrderInfo]);
 
+    const triggerSubmit = () => {
+        if (formRef.current?.isSubmitting) {
+            return;
+        }
+
+        setShouldSubmit(true);
+    };
+
+    const formRef = useRef<HTMLFormElement>(null);
+
+    useEffect(() => {
+        let isMounted = true;
+        if (shouldSubmit && formRef.current) {
+            if (isMounted) {
+                setShouldSubmit(false);
+            }
+        }
+
+        return () => {
+            isMounted = false;
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [shouldSubmit]);
+
     const onFormSubmit = (payload: OrderInfoFormPayload) => {
+        if (!shouldSubmit) {
+            return;
+        }
+
         const cleanedPayload: OrderInfoFormPayload = {
             ...payload,
             deliveryTime: createOrderInfo.isASAPDelivery ? null : payload.deliveryTime,
@@ -83,9 +110,14 @@ export const OrderInfoForm = React.memo(({
         <Formik
             initialValues={formInitialValues}
             validationSchema={validationSchema}
+            enableReinitialize
             onSubmit={onFormSubmit}
         >
-            <Form className={styles['order-info-form']}>
+            <Form
+                ref={formRef}
+                className={styles['order-info-form']}
+                autoComplete='off'
+            >
                 <div className={styles['order-info-section']}>
                     <span className={styles['order-info-title']}>
                         {localization.deliveryInfo}
@@ -127,8 +159,10 @@ export const OrderInfoForm = React.memo(({
                 <Button
                     filled
                     type='submit'
+                    disabled={isLoading}
                     isLoading={isLoading}
                     className={styles['create-order-submit']}
+                    onClick={triggerSubmit}
                 >
                     {localization.createOrder}
                 </Button>
@@ -141,4 +175,4 @@ export const OrderInfoForm = React.memo(({
             </Form>
         </Formik>
     );
-});
+}

@@ -14,6 +14,7 @@ interface Props {
     type?: React.HTMLInputTypeAttribute;
     inputClassName?: string;
     ref: ForwardedRef<HTMLInputElement | null>;
+    autoComplete?: string;
 }
 
 export const TextField = React.forwardRef<HTMLInputElement | null, Props>(({
@@ -21,6 +22,7 @@ export const TextField = React.forwardRef<HTMLInputElement | null, Props>(({
     name,
     placeholder,
     inputClassName,
+    autoComplete,
     type = 'text',
 }: Props, ref) => {
     return (
@@ -31,6 +33,7 @@ export const TextField = React.forwardRef<HTMLInputElement | null, Props>(({
                 type={type}
                 placeholder={placeholder}
                 className={inputClassName}
+                autoComplete={autoComplete}
             />
             <div className={styles['form-field-error']}>
                 <ErrorMessage name={name} />

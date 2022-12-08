@@ -2,7 +2,7 @@ import { SxProps } from "@mui/material";
 
 import { Colors } from "assets/colors";
 
-export const managerTabsStyles: SxProps = {
+export const tabsStyles: SxProps = {
     justifyContent: 'space-between',
     "& button": {
         backgroundColor: Colors.Black,
@@ -11,6 +11,7 @@ export const managerTabsStyles: SxProps = {
         fontWeight: 500,
         fontFamily: 'inherit',
         border: `1px solid ${Colors.White}`,
+        borderRadius: 3,
     },
     "& button:active": {
         backgroundColor: Colors.White,
