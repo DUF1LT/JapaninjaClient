@@ -1,0 +1,63 @@
+@import "src/assets/dimensions.scss";
+@import "src/assets/palette.scss";
+
+.home-page {
+    min-height: 600px;
+    padding: 50px 0;
+
+    display: grid;
+    width: 100%;
+
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.product-image {
+    width: 320px;
+    aspect-ratio: 1/1;
+    border-radius: 15px;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $font-big;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        transform: scale(1.05)
+    }
+
+    &-sushi {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../public/Sushi.png');
+    }
+
+    &-soups {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../public/Soups.png');
+    }
+
+    &-snacks {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../public/Snacks.png');
+    }
+
+    &-sets {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../public/Sets.png');
+    }
+
+    &-rolls {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../public/Rolls.png');
+    }
+
+    &-noodles {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../..//public/Noodles.png');
+    }
+
+    &-drinks {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../public/Drinks.png');
+    }
+
+    &-garnish {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../public/Garnish.png');
+    }
+}
