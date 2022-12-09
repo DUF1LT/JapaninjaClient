@@ -1,0 +1,11 @@
+.git
+.gitignore
+.gitmodules
+.vs
+.vscode
+_ReSharper.Caches
+*.sln
+*.njsproj
+README.md
+build
+node_modules
