@@ -4,8 +4,7 @@ import { links } from "resources";
 
 import { CreateOrderPayload, OrdersService } from "services/OrdersService";
 import { Error } from "services/types";
-import { clearCart } from "store/cartSlice";
-import { useAppDispatch, useAppSelector } from "store/hooks";
+import { useAppSelector } from "store/hooks";
 
 import { ordersQueries } from "./ordersQueries";
 
@@ -18,7 +17,6 @@ type Result = {
 export function useCreateOrder(onSuccess?: () => void): Result {
     const navigate = useNavigate();
     const auth = useAppSelector(s => s.auth.authData);
-    const dispatch = useAppDispatch();
     const customerId = auth?.id;
 
     const { mutate, isLoading, error } = useMutation<string, Error, CreateOrderPayload>(
@@ -26,7 +24,6 @@ export function useCreateOrder(onSuccess?: () => void): Result {
         (payload: CreateOrderPayload) => OrdersService.createOrder(payload),
         {
             onSuccess: (data) => {
-                dispatch(clearCart())
                 navigate(links.order.orderConfirmationWithId(data));
             }
         },

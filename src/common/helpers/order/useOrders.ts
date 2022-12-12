@@ -23,9 +23,10 @@ export function useOrders(orderStatus: OrderStatus): Result {
         }
     );
 
+
     return {
         orders: data ?? [],
-        isLoading,
+        isLoading: isLoading,
         error: error?.error ?? null,
     };
 }

@@ -8,12 +8,25 @@ import { Product } from "models/domain/Product";
 
 import { createError, getErrorByErrorType } from "./utils";
 import { ProductType } from "models/domain/ProductType";
+import { SortBy } from "models/domain/SortBy";
 
 
 export class ProductsService {
-    static async getProducts(type?: ProductType | null): Promise<Product[]> {
+    static async getProducts(type?: ProductType | null, sortBy?: SortBy | null): Promise<Product[]> {
         try {
-            var response = await $api.get<Product[]>(type ? endpoints.products.ofType(type) : endpoints.products.root);
+            const getEndpoint = () => {
+                if (type && !sortBy) {
+                    return endpoints.products.ofType(type);
+                }
+
+                if (type && sortBy) {
+                    return endpoints.products.ofTypeWithSortBy(type, sortBy);
+                }
+
+                return endpoints.products.root;
+            }
+
+            var response = await $api.get<Product[]>(getEndpoint());
             var products = response.data;
 
             return products;

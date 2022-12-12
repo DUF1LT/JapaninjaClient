@@ -1,0 +1,21 @@
+@import "src/assets/dimensions.scss";
+@import "src/assets/palette.scss";
+
+.sort-by-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+
+    &-label {
+        font-size: $font-small;
+        font-weight: 600;
+        color: $white-color;
+    }
+
+    &-icon {
+        display: flex;
+        align-items: center;
+        width: 10px;
+    }
+}

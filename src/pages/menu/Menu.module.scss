@@ -1,9 +1,22 @@
+@import "src/assets/palette.scss";
+
 .menu {
-    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 65px;
+
+    min-height: 500px;
     padding: 40px 0;
 
     &-filter {
+        display: flex;
+        align-items: center;
+        gap: 30px;
 
+        border-radius: 10px;
+        border: 1px solid $white-color;
+
+        padding: 20px 30px;
     }   
 
     &-stub {

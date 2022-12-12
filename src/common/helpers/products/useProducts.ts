@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Error } from "services/types";
 
 import { productsQueries } from "./productsQueries";
+import { SortBy } from "models/domain/SortBy";
 
 type Result = {
     products: Product[],
@@ -13,10 +14,10 @@ type Result = {
     refetch: () => void;
 };
 
-export function useProducts(type?: ProductType | null): Result {
+export function useProducts(type?: ProductType | null, sortBy?: SortBy | null): Result {
     const { data, isLoading, error, refetch } = useQuery<Product[], Error>(
-        productsQueries.type(type),
-        () => ProductsService.getProducts(type),
+        productsQueries.typeWithSortBy(type, sortBy),
+        () => ProductsService.getProducts(type, sortBy),
         {
             retry: 3,
         });

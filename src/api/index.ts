@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { OrderStatus } from 'models/domain/OrderStatus';
 import { ProductType } from 'models/domain/ProductType';
+import { SortBy } from 'models/domain/SortBy';
 
 const API_URL = 'https://localhost:2472/api';
 
@@ -30,6 +31,7 @@ const endpoints = {
         root: `/products`,
         withId: (id: string) => `/products/${id}`,
         ofType: (type: ProductType) => `/products?type=${type}`,
+        ofTypeWithSortBy: (type: ProductType, sortBy: SortBy) => `/products?type=${type}&sortField=${sortBy.field}&sortDirection=${sortBy.direction}`,
     },
     orders: {
         root: '/orders',

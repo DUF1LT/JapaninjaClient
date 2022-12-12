@@ -25,7 +25,7 @@ const authDataRoleToString: Record<Role, () => string> = {
 const authDataRoleToStartPage: Record<Role, string> = {
     [Role.Manager]: links.manager.root,
     [Role.Customer]: links.root,
-    [Role.Courier]: links.root,
+    [Role.Courier]: links.courier.root,
 }
 
 const authDataRoleToAccountLink: Record<Role, string> = {

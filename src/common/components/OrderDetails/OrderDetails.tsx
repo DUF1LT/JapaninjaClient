@@ -40,7 +40,7 @@ export function OrderDetails({
 
 
     const renderCutlery = () => {
-        const cutlery = order.cutlery;
+        const cutlery = order.cutlery.filter(c => c.amount !== 0);
 
         if (!cutlery || cutlery?.length === 0) {
             return null;

@@ -101,6 +101,7 @@ export const ruRu = {
     comment: 'Комментарий',
     completedTime: 'Завершено',
     deliveredTime: 'Доставлено',
+    sortBy: 'Сортировать по',
 
     //validations
     enterName: 'Введите имя',

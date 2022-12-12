@@ -1,7 +1,10 @@
 import { Container } from "@mui/material";
 
 import { Order } from "models/domain/Order";
+import { useEffect } from "react";
 import { localization } from "resources";
+import { clearCart } from "store/cartSlice";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 
 import styles from './OrderConfirmation.module.scss';
 
@@ -12,6 +15,15 @@ interface Props {
 export function OrderConfirmation({
     order,
 }: Props) {
+    const cart = useAppSelector(s => s.cart.cart);
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        if (cart?.products?.length > 0) {
+            dispatch(clearCart());
+        }
+    });
+
     const renderDeliveryInfo = () => {
         if (!order?.deliveryTime) {
             return (

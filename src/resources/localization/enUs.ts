@@ -101,6 +101,7 @@ export const enUs = {
     comment: 'Comment',
     completedTime: 'Completed at',
     deliveredTime: 'Delivered at',
+    sortBy: 'Sort by',
 
     //validations
     enterName: 'Enter name',

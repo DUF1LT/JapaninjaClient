@@ -24,7 +24,7 @@ export function DeliveryInfo({
     const { createOrderInfo, setCreateOrderInfo } = useCreateOrderContext();
 
     const addressValue = values[OrderInfoFormFields.Address];
-    const addresses = orderConfiguration.addressess;
+    const addresses = orderConfiguration?.addressess;
 
     const renderDeliveryInfoContent = () => {
         if (!createOrderInfo.isPickup) {
@@ -35,13 +35,13 @@ export function DeliveryInfo({
                         name={OrderInfoFormFields.Address}
                         placeholder={localization.address}
                         type='text'
-                        autoComplete={addresses.length === 0 ? 'on' : 'off'}
+                        autoComplete={addresses?.length === 0 ? 'on' : 'off'}
                     />
                     <InputHints
-                        forceClose={addressValue !== '' || addresses.length === 0}
+                        forceClose={addressValue !== '' || addresses?.length === 0}
                         inputRef={inputRef}
                     >
-                        {addresses.map(a => (
+                        {addresses?.map(a => (
                             <div
                                 className={styles['delivery-info-address']}
                                 onMouseDown={() => {

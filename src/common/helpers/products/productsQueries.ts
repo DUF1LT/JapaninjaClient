@@ -1,5 +1,6 @@
 import { ProductType } from "models/domain/ProductType";
+import { SortBy } from "models/domain/SortBy";
 
 export const productsQueries = {
-    type: (type?: ProductType | null) => ['products', 'type', type],
+    typeWithSortBy: (type?: ProductType | null, sortBy?: SortBy | null) => ['products', 'type', type, sortBy],
 }
