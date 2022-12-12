@@ -4,11 +4,10 @@ import { ManagerPanelContainer } from 'pages/manager/ManagerPanel';
 import { ManagerMenuContainer } from 'pages/manager/ManagerMenu';
 import { CreateOrderContainer } from 'pages/order/CreateOrder';
 import { OrderContainer } from 'pages/order/Order/OrderContainer';
-import { Menu } from 'pages/menu/Menu';
-import { Home } from 'pages/home/HomePage';
 import { OrderConfirmationContainer } from 'pages/order/OrderConfimration';
 import { CourierPanelContainer } from 'pages/courier/CourierPanel';
 import { CustomerPanelContainer } from 'pages/customer/CustomerPanel';
+import { HomePageContainer } from 'pages/home/HomePageContainer';
 
 import { useLocalizationContext } from 'common/contexts/LocalizationContext/LocalizationContext';
 
@@ -21,8 +20,8 @@ export function App() {
   return (
     <Routes>
       <Route path={links.root} element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path={links.menu.root} element={<Menu />} />
+        <Route index element={<HomePageContainer />} />
+        <Route path={links.menu.root} element={<HomePageContainer />} />
         <Route path={links.manager.root} element={<ManagerPanelContainer />} />
         <Route path={links.manager.menu} element={<ManagerMenuContainer />} />
         <Route path={links.order.createOrder} element={<CreateOrderContainer />} />
@@ -30,7 +29,7 @@ export function App() {
         <Route path={links.order.orderConfirmation + '/:id'} element={<OrderConfirmationContainer />} />
         <Route path={links.courier.root} element={<CourierPanelContainer />} />
         <Route path={links.customer.root} element={<CustomerPanelContainer />} />
-        <Route path='*' element={<Home />} />
+        <Route path='*' element={<HomePageContainer />} />
       </Route>
     </Routes>
   );
