@@ -102,6 +102,16 @@ export const enUs = {
     completedTime: 'Completed at',
     deliveredTime: 'Delivered at',
     sortBy: 'Sort by',
+    streetText: 'Street',
+    houseNumberText: 'House',
+    flatNumberText: 'Flat',
+    entranceText: 'Entrance',
+    floorText: 'Floor',
+    street: (streetName: string) => `st. ${streetName}`,
+    houseNumber: (houseNumber: string) => `h. ${houseNumber}`,
+    flatNumber: (flatNumber: string) => `flat ${flatNumber}`,
+    entrance: (entrance: string) => `ent. ${entrance}`,
+    floor: (floor: string) => `fl. ${floor}`,
 
     //validations
     enterName: 'Enter name',

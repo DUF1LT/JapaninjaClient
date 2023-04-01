@@ -12,7 +12,7 @@ interface Props {
     cartCutlery: CartCutlery;
 }
 
-export function CutlertyItem({
+export function CutleryItem({
     cartCutlery,
 }: Props) {
     const dispatch = useAppDispatch();

@@ -1,1 +1,1 @@
-export { CutlertyItem } from './CutleryItem';
+export { CutleryItem as CutlertyItem } from './CutleryItem';

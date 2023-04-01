@@ -19,11 +19,22 @@
         padding: 10px;
         cursor: pointer;
         transition: 0.2s all ease-in;
-
         border-radius: 10px;
         border-bottom: 1px solid $white-color;
         &:hover {
             background-color: $red-color;
+        }
+    }
+}
+
+.delivery-address {
+    &-row {
+        display: flex;
+        gap: 20px;
+        justify-content: stretch;
+
+        &-field {
+            width: 100%;
         }
     }
 }

@@ -102,6 +102,16 @@ export const ruRu = {
     completedTime: 'Завершено',
     deliveredTime: 'Доставлено',
     sortBy: 'Сортировать по',
+    streetText: 'Улица',
+    houseNumberText: 'Дом',
+    flatNumberText: 'Квартира',
+    entranceText: 'Подъезд',
+    floorText: 'Этаж',
+    street: (streetName: string) => `ул. ${streetName}`,
+    houseNumber: (houseNumber: string) => `д. ${houseNumber}`,
+    flatNumber: (flatNumber: string) => `кв. ${flatNumber}`,
+    entrance: (entrance: string) => `под. ${entrance}`,
+    floor: (floor: string) => `эт. ${floor}`,
 
     //validations
     enterName: 'Введите имя',

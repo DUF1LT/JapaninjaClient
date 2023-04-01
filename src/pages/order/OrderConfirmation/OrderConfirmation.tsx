@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { localization } from "resources";
 import { clearCart } from "store/cartSlice";
 import { useAppDispatch, useAppSelector } from "store/hooks";
+import { buildCustomerAddressString } from "common/helpers/address/buildCustomerAddressString";
 
 import styles from './OrderConfirmation.module.scss';
 
@@ -70,7 +71,7 @@ export function OrderConfirmation({
                     {localization.deliveryAddress}
                 </span>
                 <span className={styles['order-confirmation-text']}>
-                    {order.customerAddress?.address}
+                    {buildCustomerAddressString(order?.customerAddress)}
                 </span>
             </>
         )

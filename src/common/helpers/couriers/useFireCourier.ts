@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { CouriersService } from "services/CouriersService";
 import { Error } from "services/types";
@@ -14,11 +14,16 @@ type Result = {
 export const useFireCourier = (
     onSuccess?: () => void
 ): Result => {
+    const client = useQueryClient();
+
     const { mutate, isLoading, error } = useMutation<void, Error, string>(
         couriersQueries.fire,
         (id: string) => CouriersService.fireCourier(id),
         {
-            onSuccess: onSuccess,
+            onSuccess: () => {
+                onSuccess?.();
+                client.invalidateQueries(couriersQueries.couriers);
+            },
         },
     );
 

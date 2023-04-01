@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { RegisterCourierFormPayload } from "pages/manager/ManagerPanel/components/CouriersPanel/components/RegisterCourierForm/types";
 import { CouriersService } from "services/CouriersService";
@@ -15,11 +15,16 @@ type Result = {
 export const useRegisterCourier = (
     onSuccess?: () => void
 ): Result => {
+    const client = useQueryClient();
+
     const { mutate, isLoading, error } = useMutation<void, Error, RegisterCourierFormPayload>(
         couriersQueries.register,
         (payload: RegisterCourierFormPayload) => CouriersService.registerCourier(payload),
         {
-            onSuccess: onSuccess,
+            onSuccess: () => {
+                onSuccess?.();
+                client.invalidateQueries(couriersQueries.couriers);
+            },
         },
     );
 

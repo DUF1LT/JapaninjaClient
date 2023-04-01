@@ -27,9 +27,9 @@ export class AuthService {
         }
     }
 
-    static async register(email: string, password: string, confirmPassword: string): Promise<AuthData> {
+    static async register(email: string, password: string, repeatPassword: string): Promise<AuthData> {
         try {
-            const response = await $api.post<AuthData>(endpoints.auth.register, { email, password, confirmPassword });
+            const response = await $api.post<AuthData>(endpoints.auth.register, { email, password, repeatPassword });
 
             return response.data as AuthData;
         } catch (error) {

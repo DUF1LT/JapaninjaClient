@@ -5,9 +5,10 @@ import { Button } from "common/components/Button";
 import { OrderConfiguration } from "models/domain/OrderConfiguration";
 import { localization } from "resources";
 import { TextField } from "common/components/Form/TextField";
-import { OrderInfoFormFields, OrderInfoFormPayload } from "pages/order/CreateOrder/types";
+import { OrderInfoAddressFields, OrderInfoFormFields, OrderInfoFormPayload } from "pages/order/CreateOrder/types";
 import { InputHints } from "common/components/InputHints";
 import { useCreateOrderContext } from "pages/order/CreateOrder/context/CreateOrderContext";
+import { buildCustomerAddressString } from "common/helpers/address/buildCustomerAddressString";
 
 import styles from './DeliveryInfo.module.scss';
 
@@ -32,25 +33,61 @@ export function DeliveryInfo({
                 <div className={styles['delivery-address']}>
                     <TextField
                         ref={inputRef}
-                        name={OrderInfoFormFields.Address}
-                        placeholder={localization.address}
+                        name={`${OrderInfoFormFields.Address}.${OrderInfoAddressFields.Street}`}
+                        placeholder={localization.streetText}
                         type='text'
                         autoComplete={addresses?.length === 0 ? 'on' : 'off'}
                     />
+                    <div className={styles['delivery-address-row']}>
+                        <TextField
+                            className={styles['delivery-address-row-field']}
+                            name={`${OrderInfoFormFields.Address}.${OrderInfoAddressFields.HouseNumber}`}
+                            placeholder={localization.houseNumberText}
+                            type='text'
+                        />
+                        <TextField
+                            className={styles['delivery-address-row-field']}
+                            name={`${OrderInfoFormFields.Address}.${OrderInfoAddressFields.FlatNumber}`}
+                            placeholder={localization.flatNumberText}
+                            type='text'
+                        />
+                    </div>
+                    <div className={styles['delivery-address-row']}>
+                        <TextField
+                            className={styles['delivery-address-row-field']}
+                            name={`${OrderInfoFormFields.Address}.${OrderInfoAddressFields.Entrance}`}
+                            placeholder={localization.entranceText}
+                            type='text'
+                        />
+                        <TextField
+                            className={styles['delivery-address-row-field']}
+                            name={`${OrderInfoFormFields.Address}.${OrderInfoAddressFields.Floor}`}
+                            placeholder={localization.floorText}
+                            type='text'
+                        />
+                    </div>
                     <InputHints
-                        forceClose={addressValue !== '' || addresses?.length === 0}
+                        forceClose={addressValue !== null || addresses?.length === 0}
                         inputRef={inputRef}
                     >
-                        {addresses?.map(a => (
-                            <div
-                                className={styles['delivery-info-address']}
-                                onMouseDown={() => {
-                                    setFieldValue(OrderInfoFormFields.Address, a.address)
-                                }}
-                            >
-                                {a.address}
-                            </div>
-                        ))}
+                        {addresses?.map(a => {
+                            console.log(a);
+
+                            return (
+                                <div
+                                    className={styles['delivery-info-address']}
+                                    onMouseDown={() => {
+                                        setFieldValue(OrderInfoFormFields.Address, {
+                                            ...a,
+                                            addressId: a.id,
+                                        });
+                                    }}
+                                >
+                                    {buildCustomerAddressString(a)}
+                                </div>
+                            )
+                        }
+                        )}
                     </InputHints>
                 </div>
             );

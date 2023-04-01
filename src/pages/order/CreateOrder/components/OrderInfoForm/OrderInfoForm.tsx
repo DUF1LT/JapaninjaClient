@@ -8,7 +8,7 @@ import { localization } from "resources";
 import { TextField } from "common/components/Form/TextField";
 
 import { DeliveryTimeInfo } from "./components/DeliveryTimeInfo";
-import { OrderInfoFormFields, OrderInfoFormPayload } from "../../types";
+import { OrderInfoAddressFields, OrderInfoFormFields, OrderInfoFormPayload } from "../../types";
 import { DeliveryInfo } from "./components/DeliveryInfo";
 
 import styles from './OrderInfoForm.module.scss';
@@ -38,7 +38,7 @@ export const OrderInfoForm = ({
             [OrderInfoFormFields.Restaurant]: orderConfiguration.selfPickupRestaurant,
             [OrderInfoFormFields.DeliveryTime]: dayjs().add(2, 'hour'),
             [OrderInfoFormFields.AdditionalInfo]: '',
-            [OrderInfoFormFields.Address]: '',
+            [OrderInfoFormFields.Address]: null,
         };
 
         return initialValues;
@@ -49,7 +49,13 @@ export const OrderInfoForm = ({
             [OrderInfoFormFields.Name]: Yup.string().required(() => localization.enterPersonName),
             [OrderInfoFormFields.Phone]: Yup.string().required(() => localization.enterPhone),
             [OrderInfoFormFields.AdditionalInfo]: Yup.string(),
-            [OrderInfoFormFields.Address]: Yup.string(),
+            [OrderInfoFormFields.Address]: Yup.object().nullable().shape({
+                [OrderInfoAddressFields.Street]: Yup.string().required("please enter street"),
+                [OrderInfoAddressFields.HouseNumber]: Yup.string().required("please enter house number"),
+                [OrderInfoAddressFields.FlatNumber]: Yup.string().nullable(),
+                [OrderInfoAddressFields.Entrance]: Yup.string().nullable(),
+                [OrderInfoAddressFields.Floor]: Yup.string().nullable(),
+            }),
             [OrderInfoFormFields.Restaurant]: Yup.object().shape({
                 id: Yup.string(),
                 address: Yup.string(),

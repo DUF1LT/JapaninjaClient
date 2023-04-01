@@ -1,3 +1,4 @@
+import { buildCustomerAddressString } from "common/helpers/address/buildCustomerAddressString";
 import { Order } from "models/domain/Order";
 import { localization } from "resources";
 
@@ -34,7 +35,7 @@ export function OrderItem({
                     </span>
                     <span>
                         <span className={styles['order-item-bold-text']}>{localization.deliveryAddress}: </span>
-                        {order.customerAddress === null ? localization.pickup : order.customerAddress.address}
+                        {order.customerAddress === null ? localization.pickup : buildCustomerAddressString(order.customerAddress)}
                     </span>
                     <span
                         className={styles['order-item-more']}

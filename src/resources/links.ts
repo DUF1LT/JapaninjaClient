@@ -14,8 +14,10 @@ export const links = {
     },
     order: {
         root: 'order',
+        orderTemplate: 'order/:id',
         createOrder: 'createOrder',
         orderConfirmation: 'orderConfirmation',
+        orderConfirmationTemplate: 'orderConfirmation/:id',
         orderConfirmationWithId: (orderId: string) => `/orderConfirmation/${orderId}`,
         order: (orderId: string) => `order/${orderId}`,
     },

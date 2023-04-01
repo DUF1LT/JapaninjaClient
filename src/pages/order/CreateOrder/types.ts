@@ -15,6 +15,14 @@ export enum OrderInfoFormFields {
     AdditionalInfo = 'additionalInfo',
 }
 
+export enum OrderInfoAddressFields {
+    Street = "street",
+    HouseNumber = "houseNumber",
+    FlatNumber = "flatNumber",
+    Entrance = "entrance",
+    Floor = "floor",
+}
+
 export type CartOrderProduct = {
     productId: string;
     amount: number;
@@ -25,11 +33,20 @@ export type CartCutleryProduct = {
     amount: number;
 }
 
+export type OrderCustomerAddress = {
+    addressId?: string,
+    street: string,
+    houseNumber: string,
+    flatNumber?: string,
+    entrance?: string,
+    floor?: string,
+}
+
 export type CreateOrderFormPayload = {
     [CreateOrderFormFields.Products]: CartOrderProduct[];
     [CreateOrderFormFields.Cutlery]: CartCutleryProduct[];
     [OrderInfoFormFields.Restaurant]: Restaurant;
-    [OrderInfoFormFields.Address]: string | null;
+    [OrderInfoFormFields.Address]: OrderCustomerAddress | null;
     [OrderInfoFormFields.DeliveryTime]: Dayjs | null;
     [OrderInfoFormFields.Name]: string;
     [OrderInfoFormFields.Phone]: string;

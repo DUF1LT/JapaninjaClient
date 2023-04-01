@@ -1,5 +1,9 @@
 export type CustomerAddress = {
     id: string,
     customerId: string,
-    address: string,
+    street: string,
+    houseNumber: string,
+    flatNumber?: string,
+    entrance?: string,
+    floor?: string,
 }
