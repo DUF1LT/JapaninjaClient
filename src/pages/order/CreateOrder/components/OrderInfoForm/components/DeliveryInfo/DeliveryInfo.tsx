@@ -70,24 +70,19 @@ export function DeliveryInfo({
                         forceClose={addressValue !== null || addresses?.length === 0}
                         inputRef={inputRef}
                     >
-                        {addresses?.map(a => {
-                            console.log(a);
-
-                            return (
-                                <div
-                                    className={styles['delivery-info-address']}
-                                    onMouseDown={() => {
-                                        setFieldValue(OrderInfoFormFields.Address, {
-                                            ...a,
-                                            addressId: a.id,
-                                        });
-                                    }}
-                                >
-                                    {buildCustomerAddressString(a)}
-                                </div>
-                            )
-                        }
-                        )}
+                        {addresses?.map(a => (
+                            <div
+                                className={styles['delivery-info-address']}
+                                onMouseDown={() => {
+                                    setFieldValue(OrderInfoFormFields.Address, {
+                                        ...a,
+                                        addressId: a.id,
+                                    });
+                                }}
+                            >
+                                {buildCustomerAddressString(a)}
+                            </div>
+                        ))}
                     </InputHints>
                 </div>
             );

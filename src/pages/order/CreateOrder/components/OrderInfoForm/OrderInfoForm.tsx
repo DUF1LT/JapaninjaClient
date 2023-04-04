@@ -36,7 +36,7 @@ export const OrderInfoForm = ({
             [OrderInfoFormFields.Name]: '',
             [OrderInfoFormFields.Phone]: '',
             [OrderInfoFormFields.Restaurant]: orderConfiguration.selfPickupRestaurant,
-            [OrderInfoFormFields.DeliveryTime]: dayjs().add(2, 'hour'),
+            [OrderInfoFormFields.DeliveryTime]: new Date(),
             [OrderInfoFormFields.AdditionalInfo]: '',
             [OrderInfoFormFields.Address]: null,
         };
@@ -60,7 +60,7 @@ export const OrderInfoForm = ({
                 id: Yup.string(),
                 address: Yup.string(),
             }),
-            [OrderInfoFormFields.DeliveryTime]: Yup.object().nullable()
+            [OrderInfoFormFields.DeliveryTime]: Yup.date()
         };
 
         if (!createOrderInfo.isPickup) {

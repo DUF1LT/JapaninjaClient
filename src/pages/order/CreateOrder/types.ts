@@ -47,7 +47,7 @@ export type CreateOrderFormPayload = {
     [CreateOrderFormFields.Cutlery]: CartCutleryProduct[];
     [OrderInfoFormFields.Restaurant]: Restaurant;
     [OrderInfoFormFields.Address]: OrderCustomerAddress | null;
-    [OrderInfoFormFields.DeliveryTime]: Dayjs | null;
+    [OrderInfoFormFields.DeliveryTime]: Date | null;
     [OrderInfoFormFields.Name]: string;
     [OrderInfoFormFields.Phone]: string;
     [OrderInfoFormFields.AdditionalInfo]: string;

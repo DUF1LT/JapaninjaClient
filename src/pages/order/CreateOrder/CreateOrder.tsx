@@ -1,8 +1,13 @@
+import { useCallback } from 'react';
+import dayjs from 'dayjs';
+
 import { Container } from '@mui/material';
 
 import { useCart } from 'common/helpers/cart/useCart';
 import { localization } from 'resources';
 import { OrderConfiguration } from 'models/domain/OrderConfiguration';
+import { CreateOrderPayload } from 'services/OrdersService';
+import { useAppSelector } from 'store/hooks';
 
 import { OrderProductsSection } from './components/OrderProductsSection';
 import { OrderSummaryPopup } from './components/OrderSummaryPopup';
@@ -10,12 +15,9 @@ import { CutlertyItem } from './components/CutleryItem';
 import { OrderInfoForm } from './components/OrderInfoForm';
 import { CreateOrderContextProvider } from './context/CreateOrderContextProvider';
 import { useCreateOrder } from 'common/helpers/order/useCreateOrder';
+import { OrderInfoFormPayload } from './types';
 
 import styles from './CreateOrder.module.scss';
-import { OrderInfoFormPayload } from './types';
-import { CreateOrderPayload } from 'services/OrdersService';
-import { useAppSelector } from 'store/hooks';
-import { useCallback } from 'react';
 
 
 interface Props {
@@ -41,7 +43,7 @@ export function CreateOrder({
                 amount: c.amount,
             })).filter(p => p.amount !== 0),
             ...orderInfoPayload,
-            deliveryTime: orderInfoPayload.deliveryTime != null ? orderInfoPayload.deliveryTime.format() : null
+            deliveryTime: orderInfoPayload.deliveryTime != null ? dayjs(orderInfoPayload.deliveryTime).format() : null
         };
 
         onCreateOrder(createOrderPayload);

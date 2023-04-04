@@ -1,8 +1,13 @@
 @import "src/assets/dimensions.scss";
 @import "src/assets/palette.scss";
 
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .error-message {
-    margin-top: -20px;
     height: 20px;
     font-size: $font-extra-small;
     color: $red-color;
