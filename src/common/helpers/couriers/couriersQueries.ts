@@ -1,5 +1,4 @@
 export const couriersQueries = {
+    courier: (id: string) => ['couriers', id],
     couriers: ['couriers'],
-    fire: ['couriers', 'fire'],
-    register: ['couriers', 'register'],
 }

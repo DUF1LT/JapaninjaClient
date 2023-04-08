@@ -51,7 +51,7 @@ const formConstraints = {
     ingredientsMaxLength: 200,
 }
 
-const validationSchema = Yup.object({
+const validationSchema = Yup.object().shape({
     [ProductFormFields.Name]: Yup.string().max(
         formConstraints.nameMaxLength,
         () => localization.nameCanBeMaxLength(formConstraints.nameMaxLength)
@@ -72,7 +72,7 @@ const validationSchema = Yup.object({
     [ProductFormFields.Ingredients]: Yup.string().max(
         formConstraints.ingredientsMaxLength,
         () => localization.ingredientsCanBeMaxLength(formConstraints.ingredientsMaxLength)
-    ).required(() => localization.enterPassword),
+    ).required(() => localization.enterIngredients),
     [ProductFormFields.Image]: Yup.string().required(() => localization.pickImage),
 });
 

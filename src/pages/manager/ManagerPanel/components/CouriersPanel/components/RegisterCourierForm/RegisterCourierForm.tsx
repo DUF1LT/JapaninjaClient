@@ -42,7 +42,6 @@ const validationSchema = Yup.object({
     [RegisterCourierFormFields.Name]: Yup.string().required(() => localization.enterPersonName),
     [RegisterCourierFormFields.Phone]: Yup.string().required(() => localization.enterPhone),
     [RegisterCourierFormFields.Email]: Yup.string().email(() => localization.enterValidEmail).required(localization.enterEmail),
-    [RegisterCourierFormFields.Email]: Yup.string().email(() => localization.enterValidEmail).required(localization.enterEmail),
     [RegisterCourierFormFields.Password]: Yup.string().required(() => localization.enterPassword)
         .min(formConstraints.length, () => localization.passwordsShouldHaveMinLength(formConstraints.length))
         .minLowercase(formConstraints.minLowerCase, localization.passwordsShouldHaveAtLeastLower(formConstraints.minLowerCase))

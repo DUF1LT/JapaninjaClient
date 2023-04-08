@@ -17,7 +17,6 @@ export const useFireCourier = (
     const client = useQueryClient();
 
     const { mutate, isLoading, error } = useMutation<void, Error, string>(
-        couriersQueries.fire,
         (id: string) => CouriersService.fireCourier(id),
         {
             onSuccess: () => {

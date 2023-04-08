@@ -1,3 +1,4 @@
 export enum CourierPanelTab {
-    Orders = 0,
+    Profile = 0,
+    Orders = 1,
 }

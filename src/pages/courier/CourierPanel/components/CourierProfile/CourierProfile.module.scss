@@ -1,0 +1,60 @@
+@import "src/assets/palette.scss";
+@import "src/assets/dimensions.scss";
+
+.courier-profile {
+    display: flex;
+    column-gap: 50px;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 580px;
+    padding-bottom: 50px;
+
+    &-left {
+        display: flex;
+        column-gap: 50px;
+    }
+
+    &-edit {
+        height: 35px;
+        color: $red-color;
+        font-size: $font-medium;
+
+        &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        transition: all 0.5s ease-in;
+    }
+
+    &-image {
+        width: 290px;
+        height: 290px;
+        object-fit: cover;
+        border: 3px solid $red-color;
+        border-radius: 20px;
+    }
+
+    &-info {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        font-size: $font-medium;
+
+        &-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        &-entry {
+            display: flex;
+            font-weight: 600;
+            align-items: center;
+        }
+
+        &-value {
+            font-weight: 200;
+        }
+    }
+}

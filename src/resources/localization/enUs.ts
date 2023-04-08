@@ -112,6 +112,10 @@ export const enUs = {
     flatNumber: (flatNumber: string) => `flat ${flatNumber}`,
     entrance: (entrance: string) => `ent. ${entrance}`,
     floor: (floor: string) => `fl. ${floor}`,
+    profile: 'Profile',
+    ordersAmount: 'Delivered orders',
+    rating: 'Rating',
+    editProfile: 'Edit profile',
 
     //validations
     enterName: 'Enter name',

@@ -37,11 +37,13 @@ export function CustomerPanel() {
                     variant="fullWidth"
                     onChange={(_, v) => setTab(v)}
                 >
-                    {customerPanelTabs.map(t => (
+                    {customerPanelTabs.map((t, i) => (
                         <Tab
                             key={t}
                             label={customerPanelTabToLabel[t]()}
                             value={t}
+                            isFirst={i === 0}
+                            isLast={i === customerPanelTabs.length - 1}
                         />
                     ))}
                 </Tabs>

@@ -3,4 +3,10 @@ export type Courier = {
     fullName: string,
     phoneNumber: string,
     email: string,
+    image?: string,
+}
+
+export type CourierDetailed = Courier & {
+    ordersAmount: number,
+    averageRating: number,
 }

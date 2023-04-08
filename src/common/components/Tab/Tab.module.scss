@@ -9,3 +9,12 @@
         color: $black-color;
     }
 }
+
+
+.tab.first-tab {
+    border-radius: 12px 0 0 12px;
+}
+
+.tab.last-tab {
+    border-radius: 0 12px 12px 0;
+}

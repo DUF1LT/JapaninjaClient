@@ -18,7 +18,6 @@ export const useRegisterCourier = (
     const client = useQueryClient();
 
     const { mutate, isLoading, error } = useMutation<void, Error, RegisterCourierFormPayload>(
-        couriersQueries.register,
         (payload: RegisterCourierFormPayload) => CouriersService.registerCourier(payload),
         {
             onSuccess: () => {

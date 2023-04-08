@@ -112,6 +112,10 @@ export const ruRu = {
     flatNumber: (flatNumber: string) => `кв. ${flatNumber}`,
     entrance: (entrance: string) => `под. ${entrance}`,
     floor: (floor: string) => `эт. ${floor}`,
+    profile: 'Профиль',
+    ordersAmount: 'Выполненных заказов',
+    rating: 'Рейтинг',
+    editProfile: 'Редактирование профиля',
 
     //validations
     enterName: 'Введите имя',

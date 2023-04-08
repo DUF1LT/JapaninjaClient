@@ -42,11 +42,13 @@ export function ManagerPanel() {
                     variant="fullWidth"
                     onChange={(_, v) => setTab(v)}
                 >
-                    {managerPanelTabs.map(t => (
+                    {managerPanelTabs.map((t, i) => (
                         <Tab
                             key={t}
                             label={managerPanelTabToLabel[t]()}
                             value={t}
+                            isFirst={i === 0}
+                            isLast={i === managerPanelTabs.length - 1}
                         />
                     ))}
                 </Tabs>
