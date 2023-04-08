@@ -114,8 +114,12 @@ export const enUs = {
     floor: (floor: string) => `fl. ${floor}`,
     profile: 'Profile',
     ordersAmount: 'Delivered orders',
-    rating: 'Rating',
     editProfile: 'Edit profile',
+    rateOrder: 'Rate order',
+    feedback: 'Feedback',
+    rating: 'Rating',
+    pleaseLeaveFeedback: 'Please, leave your feedback',
+    rate: 'Rate',
 
     //validations
     enterName: 'Enter name',

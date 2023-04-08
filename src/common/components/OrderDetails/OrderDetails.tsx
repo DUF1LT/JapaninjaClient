@@ -1,29 +1,34 @@
 import { Dialog, DialogTitle, Divider } from "@mui/material";
 
-import { Order } from "models/domain/Order";
 import { localization } from "resources";
+import { useAppSelector } from "store/hooks";
+import { OrderStatus } from "models/domain/OrderStatus";
+import { Role } from "models/response/AuthData";
 
+import { FeedbackSection } from "./components/FeedbackSection";
 import { dialogStyles } from "../Form/styles";
 import { DetailsProductItem } from "./components/DetailsProductItem";
 
 import styles from './OrderDetails.module.scss';
+import { useOrder } from "common/helpers/order/useOrder";
+import { LoadingStub } from "../LoadingStub";
+
 
 interface Props {
-    order: Order | null;
+    orderId: string;
     className?: string;
     isOpen: boolean;
     onClose: () => void;
 }
 
 export function OrderDetails({
-    order,
+    orderId,
     isOpen,
     onClose,
     className,
 }: Props) {
-    if (!order) {
-        return null;
-    }
+    const { authData } = useAppSelector(s => s.auth);
+    const { order, isLoading } = useOrder(orderId);
 
     const renderComment = () => {
         if (order.comment === null || order.comment?.trim() === '') {
@@ -73,6 +78,29 @@ export function OrderDetails({
         );
     }
 
+    const renderFeedback = () => {
+        if (order.status !== OrderStatus.Closed) {
+            return null;
+        }
+
+        if (authData.role === Role.Customer) {
+            return (
+                <FeedbackSection
+                    orderId={order.id}
+                    isRated={order.isRated}
+                    rating={order.rating}
+                    feedback={order.feedback}
+                />
+            );
+        }
+
+        return FeedbackSection.Readonly({ rating: order.rating, feedback: order.feedback })
+    }
+
+    if (!order) {
+        return null;
+    }
+
     return (
         <Dialog
             className={className}
@@ -86,27 +114,34 @@ export function OrderDetails({
             }}
             maxWidth={'lg'}
         >
-            <div className={styles['order-details-modal-content']}>
-                <DialogTitle
-                    fontFamily='inherit'
-                    fontSize={24}
-                >
-                    {localization.order} #{order.numberId}
-                </DialogTitle>
-                <div className={styles['order-details-modal-products']}>
-                    {order.products.map(p => (
-                        <DetailsProductItem
-                            orderProduct={p}
-                        />
-                    ))}
-                </div>
-                <Divider className={styles['order-details-modal-divider']} />
-                <div className={styles['order-details-modal-info']}>
-                    {renderCutlery()}
-                    {renderComment()}
-                    {renderDeliveryFactTime()}
-                </div>
-            </div>
+            {isLoading
+                ? <LoadingStub />
+                : (
+                    <div className={styles['order-details-modal-content']}>
+                        <DialogTitle
+                            fontFamily='inherit'
+                            fontSize={24}
+                        >
+                            {localization.order} #{order.numberId}
+                        </DialogTitle>
+                        <div className={styles['order-details-modal-products']}>
+                            {order.products.map(p => (
+                                <DetailsProductItem
+                                    orderProduct={p}
+                                />
+                            ))}
+                        </div>
+                        <Divider className={styles['order-details-modal-divider']} />
+                        <div className={styles['order-details-modal-info']}>
+                            {renderCutlery()}
+                            {renderComment()}
+                            {renderDeliveryFactTime()}
+                        </div>
+                        <div className={styles['order-details-modal-feedback']}>
+                            {renderFeedback()}
+                        </div>
+                    </div>
+                )}
         </Dialog>
     )
 }

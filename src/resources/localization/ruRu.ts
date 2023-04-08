@@ -114,8 +114,12 @@ export const ruRu = {
     floor: (floor: string) => `эт. ${floor}`,
     profile: 'Профиль',
     ordersAmount: 'Выполненных заказов',
-    rating: 'Рейтинг',
     editProfile: 'Редактирование профиля',
+    rateOrder: 'Оцените заказ',
+    feedback: 'Отзыв',
+    rating: 'Рейтинг',
+    pleaseLeaveFeedback: 'Пожалуйста, оставьте отзыв о заказе',
+    rate: 'Оценить',
 
     //validations
     enterName: 'Введите имя',

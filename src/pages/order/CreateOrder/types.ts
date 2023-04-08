@@ -1,4 +1,3 @@
-import { Dayjs } from "dayjs";
 import { Restaurant } from "models/domain/Restaurant";
 
 export enum CreateOrderFormFields {

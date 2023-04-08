@@ -45,6 +45,7 @@ const endpoints = {
         ship: (orderId: string) => `/orders/${orderId}/ship`,
         close: (orderId: string) => `/orders/${orderId}/close`,
         cancel: (orderId: string) => `/orders/${orderId}/cancel`,
+        rate: (orderId: string) => `/orders/${orderId}/rate`,
     }
 };
 

@@ -113,11 +113,13 @@ export function OrdersPanel() {
                 : (
                     renderOrders()
                 )}
-            <OrderDetails
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                order={orderDetails!}
-            />
+            {orderDetails && (
+                <OrderDetails
+                    orderId={orderDetails.id}
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                />
+            )}
         </div>
     );
 }

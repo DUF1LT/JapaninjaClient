@@ -28,6 +28,9 @@ export class Order {
     comment?: string | null;
     products: OrdersProduct[];
     cutlery: OrdersCutlery[];
+    isRated: boolean;
+    rating?: number;
+    feedback: string;
 
     constructor({
         id,
@@ -46,7 +49,10 @@ export class Order {
         status,
         comment,
         cutlery,
-        products
+        products,
+        isRated,
+        rating,
+        feedback
     }: OrderDescriptor) {
         this.id = id;
         this.numberId = numberId;
@@ -65,5 +71,8 @@ export class Order {
         this.comment = comment;
         this.cutlery = cutlery;
         this.products = products;
+        this.isRated = isRated;
+        this.rating = rating;
+        this.feedback = feedback;
     }
 }

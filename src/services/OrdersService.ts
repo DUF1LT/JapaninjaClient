@@ -215,4 +215,20 @@ export class OrdersService {
             throw createError(localization.somethingWentWrong);
         }
     }
+
+    static async rateOrder(orderId: string, rating: number, feedback: string): Promise<void> {
+        try {
+            await $api.put<void>(endpoints.orders.rate(orderId), { rating, feedback });
+        } catch (error) {
+            const axiosErorr = error as AxiosError;
+
+            if (axiosErorr.isAxiosError) {
+                const errorData = axiosErorr.response?.data as ErrorResponse;
+
+                throw getErrorByErrorType(errorData?.error);
+            }
+
+            throw createError(localization.somethingWentWrong);
+        }
+    }
 }

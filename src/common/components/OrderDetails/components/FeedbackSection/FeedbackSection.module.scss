@@ -1,0 +1,42 @@
+@import "src/assets/dimensions.scss";
+@import "src/assets/palette.scss";
+
+.feedback {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &-form {
+        width: 100%;
+
+        &-rating {
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        &-body {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+
+    &-item {
+        display: flex;
+        font-size: $font-medium;
+        align-items: center;
+        gap: 15px;
+
+        &-info {
+            display: flex;
+            font-weight: 600;
+            font-size: $font-medium;
+            align-items: center;
+            gap: 10px;
+        }
+    }
+}
