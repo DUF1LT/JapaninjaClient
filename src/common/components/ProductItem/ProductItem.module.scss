@@ -17,6 +17,10 @@
         width: 100%;
         font-size: $font-medium;
         font-weight: 600;
+
+        &-price {
+            width: 30%;
+        }
     }
 
     &-description {

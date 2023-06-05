@@ -23,7 +23,7 @@ export function ProductItem({
                 <span>
                     {product.name}
                 </span>
-                <span>
+                <span className={styles['product-item-header-price']}>
                     {product.price} {localization.rubles}
                 </span>
             </div>

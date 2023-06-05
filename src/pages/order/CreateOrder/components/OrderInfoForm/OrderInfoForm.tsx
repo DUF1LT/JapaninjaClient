@@ -49,8 +49,8 @@ export const OrderInfoForm = ({
             [OrderInfoFormFields.Phone]: Yup.string().required(() => localization.enterPhone),
             [OrderInfoFormFields.AdditionalInfo]: Yup.string(),
             [OrderInfoFormFields.Address]: Yup.object().nullable().shape({
-                [OrderInfoAddressFields.Street]: Yup.string().required("please enter street"),
-                [OrderInfoAddressFields.HouseNumber]: Yup.string().required("please enter house number"),
+                [OrderInfoAddressFields.Street]: Yup.string().required(() => localization.enterStreet),
+                [OrderInfoAddressFields.HouseNumber]: Yup.string().required(() => localization.enterHouseNumber),
                 [OrderInfoAddressFields.FlatNumber]: Yup.string().nullable(),
                 [OrderInfoAddressFields.Entrance]: Yup.string().nullable(),
                 [OrderInfoAddressFields.Floor]: Yup.string().nullable(),

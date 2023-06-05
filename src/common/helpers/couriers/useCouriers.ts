@@ -8,12 +8,13 @@ import { couriersQueries } from "./couriersQueries";
 
 type Result = {
     couriers: Courier[],
+    refetch: () => void,
     isLoading: boolean,
     error: string | null,
 };
 
 export function useCouriers(): Result {
-    const { data, isLoading, error } = useQuery<Courier[], Error>(
+    const { data, isLoading, refetch, error } = useQuery<Courier[], Error>(
         couriersQueries.couriers,
         () => CouriersService.getCouriers(),
         {
@@ -22,6 +23,7 @@ export function useCouriers(): Result {
 
     return {
         couriers: data ?? [],
+        refetch,
         isLoading,
         error: error?.error ?? null,
     };

@@ -27,8 +27,11 @@ export function CouriersPanel() {
     const [isFireCourierModalOpen, setIsFireCourierModalOpen] = useState<boolean>(false);
     const [manageCourier, setManageCourier] = useState<Courier>();
 
-    const { couriers, isLoading } = useCouriers();
-    const { onFireCourier, isLoading: isFireLoading } = useFireCourier(() => setIsFireCourierModalOpen(false));
+    const { couriers, isLoading, refetch } = useCouriers();
+    const { onFireCourier, isLoading: isFireLoading } = useFireCourier(() => {
+        setIsFireCourierModalOpen(false);
+        refetch();
+    });
 
     const renderCouriers = () => {
         if (isLoading) {

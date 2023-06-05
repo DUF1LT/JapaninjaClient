@@ -4,6 +4,7 @@ import { OrdersCutlery } from "./OrdersCutlery";
 import { OrdersProduct } from "./OrdersProduct";
 import { OrderStatus } from "./OrderStatus";
 import { Restaurant } from "./Restaurant";
+import { Courier } from "./Courier";
 
 export type OrderDescriptor = Omit<Order, 'deliveryTime' | 'deliveryFactTime'> & {
     deliveryTime: string | null;
@@ -18,6 +19,7 @@ export class Order {
     price: number;
     customerPhoneNumber: string;
     courierId?: string | null;
+    courier: Courier;
     restaurantId: string;
     restaurant: Restaurant;
     customerAddressId: string;
@@ -40,6 +42,7 @@ export class Order {
         price,
         customerPhoneNumber,
         courierId,
+        courier,
         restaurantId,
         restaurant,
         customerAddressId,
@@ -61,6 +64,7 @@ export class Order {
         this.price = price;
         this.customerPhoneNumber = customerPhoneNumber;
         this.courierId = courierId;
+        this.courier = courier;
         this.restaurantId = restaurantId;
         this.restaurant = restaurant;
         this.customerAddressId = customerAddressId;

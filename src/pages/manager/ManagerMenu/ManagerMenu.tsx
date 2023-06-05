@@ -31,12 +31,18 @@ export function ManagerMenu() {
     const { products, isLoading, refetch } = useProducts(selectedType);
     const isProductsLoading = useDelayedFlag(300, [isLoading]);
 
-    const { onDeleteProduct } = useDeleteProduct(() => setIsDeleteDialogOpen(false));
+    const { onDeleteProduct } = useDeleteProduct(() => {
+        setIsDeleteDialogOpen(false)
+        refetch();
+    });
 
     const renderProductItemActions = (product: Product) => (
         <div className={styles['product-item-actions']}>
             <Button
-                onClick={() => setIsDeleteDialogOpen(true)}
+                onClick={() => {
+                    setIsDeleteDialogOpen(true);
+                    setManageProduct(product);
+                }}
             >
                 {localization.delete}
             </Button>
@@ -124,7 +130,6 @@ export function ManagerMenu() {
                 onNo={() => setIsDeleteDialogOpen(false)}
                 onYes={() => {
                     onDeleteProduct(manageProduct?.id ?? '')
-                    refetch();
                 }}
             />
         </>

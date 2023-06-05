@@ -4,14 +4,14 @@ import { localization } from "resources";
 import { useAppSelector } from "store/hooks";
 import { OrderStatus } from "models/domain/OrderStatus";
 import { Role } from "models/response/AuthData";
+import { useOrder } from "common/helpers/order/useOrder";
 
 import { FeedbackSection } from "./components/FeedbackSection";
 import { dialogStyles } from "../Form/styles";
 import { DetailsProductItem } from "./components/DetailsProductItem";
+import { LoadingStub } from "../LoadingStub";
 
 import styles from './OrderDetails.module.scss';
-import { useOrder } from "common/helpers/order/useOrder";
-import { LoadingStub } from "../LoadingStub";
 
 
 interface Props {
@@ -20,6 +20,11 @@ interface Props {
     isOpen: boolean;
     onClose: () => void;
 }
+
+const orderStatusesWithCourier = [
+    OrderStatus.Shipping,
+    OrderStatus.Closed,
+]
 
 export function OrderDetails({
     orderId,
@@ -73,8 +78,32 @@ export function OrderDetails({
         return (
             <span className={styles['order-details-modal-item']}>
                 <span className={styles['order-details-modal-item-info']}>{label}: </span>
-                {deliveryFactTime.format('HH:mm')}
+                {deliveryFactTime.format('DD.MM - HH:mm')}
             </span>
+        );
+    }
+
+    const renderCourierInfo = () => {
+        const isDeliveryOrder = !!order.restaurant;
+
+        if (!orderStatusesWithCourier.includes(order.status) || !isDeliveryOrder || !order.courier) {
+            return null;
+        }
+
+        const courier = order.courier;
+
+        return (
+            <div className={styles['order-details-modal-item']}>
+                <span className={styles['order-details-modal-item-info']}>{localization.courier}: </span>
+                <div className={styles['order-details-modal-item-courier-info']}>
+                    {courier.image && (
+                        <div className={styles['order-details-modal-item-image-wrapper']}>
+                            <img className={styles['order-details-modal-item-image']} src={courier.image} alt='' />
+                        </div>
+                    )}
+                    {courier.fullName}, {courier.phoneNumber}
+                </div>
+            </div>
         );
     }
 
@@ -136,6 +165,7 @@ export function OrderDetails({
                             {renderCutlery()}
                             {renderComment()}
                             {renderDeliveryFactTime()}
+                            {renderCourierInfo()}
                         </div>
                         <div className={styles['order-details-modal-feedback']}>
                             {renderFeedback()}
